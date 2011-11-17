@@ -1,0 +1,15 @@
+@import url(blocks/b-app.css);
+@import url(blocks/b-layout.css);
+@import url(blocks/b-state.css);
+@import url(blocks/b-login.css);
+@import url(../libs/bootstrap.css);
+
+
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-width: 1000px;
+    width: 100%;
+}
+
