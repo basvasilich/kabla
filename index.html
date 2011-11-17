@@ -15,39 +15,61 @@
 <div class="b-app">
     <div class="b-state b-state_login">
         <div class="b-layout container">
-            <div class="b-login">
-                <div class="b-login__header">
-                    <img src="app/img/logo_boomcard.png" alt="" />
-                    <p><em>Предоставьте самым дорогим для вас людям право выбирать себе подарок по вкусу в сотнях магазинов, ресторанов, салонов красоты и не только!</em></p>
-                </div>
+
+            <div class="b-login span12">
                 <form action="" class="form-stacked b-login__form">
-                    <fieldset>
-                        <!--<legend>Boomcard HQ</legend>-->
-                        <div class="clearfix">
-                            <label class="b-login__label" for="loginName">Логин</label>
+                    <div class="row">
+                        <div class="b-login__header">
+                            <img src="app/img/logo_boomcard.png" alt=""/>
+                        </div>
+                        <div class="row">
+                            <div class="b-login__note span7">
+                                 <p><em>Предоставьте самым дорогим для вас людям право выбирать себе подарок по вкусу в
+                                   сотнях
+                                   магазинов, ресторанов, салонов красоты и не только!</em></p>
+                               <fieldset>
+                                    <legend>У меня есть купон</legend>
+                                    <div class="clearfix">
+                                        <!--<label class="b-login__label" for="loginName"> Номер</label>-->
+                                        <div class="input">
+                                            <input class="b-login__coupon span6" placeholder="1234-567-1234" id="loginName" name="loginName" type="text">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="span4">
+                                <fieldset class="b-login__sidebar">
+                                    <legend>Я пользователь</legend>
+                                    <div class="clearfix">
+                                        <label class="b-login__label" for="loginName">Логин</label>
 
-                            <div class="input">
-                                <input class=" span5 xlarge" placeholder="basvasilich" id="loginName" name="loginName" type="text">
+                                        <div class="input">
+                                            <input class="large" placeholder="basvasilich" id="loginName" name="loginName" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">
+                                        <label class="b-login__label" for="loginPass">Пароль</label>
+
+                                        <div class="input">
+                                            <input class="large" placeholder="******" id="loginPass" name="loginPass" type="password">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+
                             </div>
                         </div>
-                        <div class="clearfix">
-                            <label class="b-login__label" for="loginPass">Пароль</label>
-                            <div class="input">
-                                <input class=" span5 xlarge" placeholder="******" id="loginPass" name="loginPass" type="password">
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <div class="actions">
-                        <button type="submit" class="btn primary">Войти</button>
-                        <span class="b-login__option-action">или <a href="#">зарегистрироваться</a></span>
+                         <div class="actions b-login__actions">
+                                    <button type="submit" class="btn large primary">Войти на бумкарту</button>
+                                    <!--<span class="b-login__option-action">или <a href="#">зарегистрироваться</a></span>-->
+                                </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="b-state b-state_profile">2</div>
-    <div class="b-state b-state_catalog">3</div>
+    <!--<div class="b-state b-state_profile">2</div>-->
+    <!--<div class="b-state b-state_catalog">3</div>-->
 </div>
 </div>
 </body>
