@@ -3,14 +3,52 @@
 <head>
     <title>Boomcard</title>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="libs/jquery-1.7.min.js" />
-    <script type="text/javascript" src="libs/jquery-jtemplates.js" />
-    <script type="text/javascript" src="libs/underscore-min.js" />
-    <script type="text/javascript" src="libs/backbone-min.js" />
-    <script type="text/javascript" src="app/app.js" />
+    <script type="text/javascript" src="libs/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="libs/jquery-jtemplates.js"></script>
+    <script type="text/javascript" src="libs/underscore-min.js"></script>
+    <script type="text/javascript" src="libs/backbone-min.js"></script>
+    <script type="text/javascript" src="libs/bootstamp.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
     <link type="text/css" rel="stylesheet" href="app/app.css">
 </head>
 <body>
+<div class="b-app">
+    <div class="b-state b-state_login">
+        <div class="b-layout container">
+            <div class="b-login">
+                <div class="b-login__header">
+                    <img src="app/img/logo_boomcard.png" alt="" />
+                    <p><em>Предоставьте самым дорогим для вас людям право выбирать себе подарок по вкусу в сотнях магазинов, ресторанов, салонов красоты и не только!</em></p>
+                </div>
+                <form action="" class="form-stacked b-login__form">
+                    <fieldset>
+                        <!--<legend>Boomcard HQ</legend>-->
+                        <div class="clearfix">
+                            <label class="b-login__label" for="loginName">Логин</label>
 
+                            <div class="input">
+                                <input class=" span5 xlarge" placeholder="basvasilich" id="loginName" name="loginName" type="text">
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <label class="b-login__label" for="loginPass">Пароль</label>
+                            <div class="input">
+                                <input class=" span5 xlarge" placeholder="******" id="loginPass" name="loginPass" type="password">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="actions">
+                        <button type="submit" class="btn primary">Войти</button>
+                        <span class="b-login__option-action">или <a href="#">зарегистрироваться</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="b-state b-state_profile">2</div>
+    <div class="b-state b-state_catalog">3</div>
+</div>
+</div>
 </body>
 </html>
