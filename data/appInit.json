@@ -1,0 +1,7 @@
+{
+    "appInit":
+    {
+        "currentLogin": "",
+        "appState": "login"
+    }
+}
