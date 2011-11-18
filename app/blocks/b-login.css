@@ -31,31 +31,38 @@
 
 .b-login__coupon
 {
-    font-size: 24px;
-    height: 30px;
+    font-size: 38px;
+    height: 42px;
 }
 
 .b-login__note p
 {
     color: #404040;
-    padding: 20px 20px 0 0;
+    padding: 0 20px 0 0;
 }
 
 .b-login__sidebar
 {
-    margin-top: 18px;
+    margin-top: 20px;
     border-left: 1px solid #f1f1f1;
     margin-left: -20px;
     padding-left: 20px;
 }
 
-.b-login__form
+.b-login__note__i
 {
-    margin-left: 20px;
-
+    padding: 20px 0 0 20px;
 }
 
-.b-login .b-login__actions
+.b-login__note__i p
 {
+    padding-top: 8px;
+}
+
+.b-login  .form-stacked .b-login__actions
+{
+    margin-top: 0;
     margin-bottom: 0;
+    margin-left: 0;
+    text-align: center;
 }
