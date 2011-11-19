@@ -1,5 +1,5 @@
 {
-    "appInit":
+    "settings":
     {
         "currentLogin": "",
         "appState": "login"
