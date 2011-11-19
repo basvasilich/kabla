@@ -1,7 +1,7 @@
-/* ==========================================================
- * bootstrap-alerts.js v1.4.0
- * http://twitter.github.com/bootstrap/javascript.html#alerts
- * ==========================================================
+/* ============================================================
+ * bootstrap-dropdown.js v1.4.0
+ * http://twitter.github.com/bootstrap/javascript.html#dropdown
+ * ============================================================
  * Copyright 2011 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,102 +15,45 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * ========================================================== */
+ * ============================================================ */
 
 
 !function( $ ){
 
   "use strict"
 
-  /* CSS TRANSITION SUPPORT (https://gist.github.com/373874)
-   * ======================================================= */
+  /* DROPDOWN PLUGIN DEFINITION
+   * ========================== */
 
-   var transitionEnd
-
-   $(document).ready(function () {
-
-     $.support.transition = (function () {
-       var thisBody = document.body || document.documentElement
-         , thisStyle = thisBody.style
-         , support = thisStyle.transition !== undefined || thisStyle.WebkitTransition !== undefined || thisStyle.MozTransition !== undefined || thisStyle.MsTransition !== undefined || thisStyle.OTransition !== undefined
-       return support
-     })()
-
-     // set CSS transition event type
-     if ( $.support.transition ) {
-       transitionEnd = "TransitionEnd"
-       if ( $.browser.webkit ) {
-        transitionEnd = "webkitTransitionEnd"
-       } else if ( $.browser.mozilla ) {
-        transitionEnd = "transitionend"
-       } else if ( $.browser.opera ) {
-        transitionEnd = "oTransitionEnd"
-       }
-     }
-
-   })
-
- /* ALERT CLASS DEFINITION
-  * ====================== */
-
-  var Alert = function ( content, options ) {
-    this.settings = $.extend({}, $.fn.alert.defaults, options)
-    this.$element = $(content)
-      .delegate(this.settings.selector, 'click', this.close)
-  }
-
-  Alert.prototype = {
-
-    close: function (e) {
-      var $element = $(this).parent('.alert-message')
-
-      e && e.preventDefault()
-      $element.removeClass('in')
-
-      function removeElement () {
-        $element.remove()
-      }
-
-      $.support.transition && $element.hasClass('fade') ?
-        $element.bind(transitionEnd, removeElement) :
-        removeElement()
-    }
-
-  }
-
-
- /* ALERT PLUGIN DEFINITION
-  * ======================= */
-
-  $.fn.alert = function ( options ) {
-
-    if ( options === true ) {
-      return this.data('alert')
-    }
-
+  $.fn.dropdown = function ( selector ) {
     return this.each(function () {
-      var $this = $(this)
+      $(this).delegate(selector || d, 'click', function (e) {
+        var li = $(this).parent('li')
+          , isActive = li.hasClass('open')
 
-      if ( typeof options == 'string' ) {
-        return $this.data('alert')[options]()
-      }
-
-      $(this).data('alert', new Alert( this, options ))
-
+        clearMenus()
+        !isActive && li.toggleClass('open')
+        return false
+      })
     })
   }
 
-  $.fn.alert.defaults = {
-    selector: '.close'
+  /* APPLY TO STANDARD DROPDOWN ELEMENTS
+   * =================================== */
+
+  var d = 'a.menu, .dropdown-toggle'
+
+  function clearMenus() {
+    $(d).parent('li').removeClass('open')
   }
 
-  $(document).ready(function () {
-    new Alert($('body'), {
-      selector: '.alert-message[data-alert] .close'
-    })
+  $(function () {
+    $('html').bind("click", clearMenus)
+    $('body').dropdown( '[data-dropdown] a.menu, [data-dropdown] .dropdown-toggle' )
   })
 
 }( window.jQuery || window.ender );
+
 
 
 /**

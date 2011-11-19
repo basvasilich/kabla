@@ -1,7 +1,7 @@
 {
     "settings":
     {
-        "currentLogin": "",
+        "currentUser": "",
         "appState": "login"
     }
 }

@@ -1,4 +1,4 @@
-.b-login
+.b-login__i
 {
     border-radius: 6px 6px 6px 6px;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
@@ -29,7 +29,7 @@
     display: block;
 }
 
-.b-login__coupon
+.b-login__couponField
 {
     font-size: 38px;
     height: 42px;
@@ -65,4 +65,14 @@
     margin-bottom: 0;
     margin-left: 0;
     text-align: center;
+}
+
+.b-login__error
+{
+    margin: 0 auto;
+}
+
+.b-login__error .alert-message
+{
+    display: none;
 }

@@ -1,9 +1,75 @@
 $(document).ready(function() {
     App = window.App
     App.init();
-    /* $('button.primary').click(function(evt){
-     evt.preventDefault();
-     })*/
+
+    App.login = {};
+    App.login.$control = $('.b-login');
+    App.login.$button = App.login.$control.find('.primary')
+    App.login.$coupon = App.login.$control.find('.b-login__couponField')
+    App.login.$login = App.login.$control.find('.b-login__loginField')
+    App.login.$pass = App.login.$control.find('.b-login__passField')
+    App.login.$messages = App.login.$control.find('.alert-message')
+    App.login.$messagesClose = App.login.$messages.find('.close')
+
+    App.login.showMessage = function(kind) {
+        var message = App.login.$messages.filter('.' + kind);
+        App.login.$messages.hide();
+        message.fadeIn('fast')
+    }
+
+    App.login.$messages.each(function() {
+        var _that = this
+        $(_that).find('.close').click(function(evt) {
+            evt.preventDefault()
+            $(_that).fadeOut('fast');
+        })
+    });
+
+    App.login.$button.click(function(evt) {
+        evt.preventDefault();
+        App.login.checkForm()
+    })
+
+    App.login.checkForm = function() {
+        if (App.login.$coupon.val() == '' & App.login.$login.val() == '') {
+            return;
+        } else if (!(App.login.$coupon.val() == '')) {
+            return App.checkCoupon(App.login.$coupon.val())
+        } else {
+            return App.login.authUser(App.login.$login.val(), App.login.$pass.val())
+        }
+    }
+
+    App.checkCoupon = function(coupon) {
+        if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
+            coupon = parseInt(coupon);
+            App.login.$messages.hide();
+        } else {
+            App.login.showMessage('warning');
+        }
+    }
+
+
+    App.login.authUser = function(login, pass) {
+        var user = App.users.getByLogin(login);
+        if (user) {
+            if (user.get('password') == pass) {
+                if (!(App.state.get('currentUser') == login)) {
+                    App.login.$messages.hide();
+                    App.currentUser = App.users.getByLogin(login)
+                    App.state.save({'currentUser': App.currentUser.get('login'), 'currentUserID' : App.currentUser.get('id'), 'appState': 'catalog'});
+                    console.log(App.state.toJSON())
+                }
+            } else {
+                App.login.showMessage('error');
+            }
+        } else {
+            App.login.showMessage('error');
+        }
+
+    }
+
+
 });
 
 var App = (function() {
@@ -42,6 +108,16 @@ var App = (function() {
                 nextOrder: function() {
                     if (!this.length) return 1;
                     return this.last().get('id') + 1;
+                },
+                getByLogin:  function(login) {
+                    return this.find(function(user) {
+                        return user.get('login') === login;
+                    })
+                },
+                getByID:  function(id) {
+                    return this.find(function(user) {
+                        return user.get('id') === id;
+                    })
                 }
 
             });

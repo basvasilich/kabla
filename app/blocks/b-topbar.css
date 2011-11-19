@@ -1,0 +1,42 @@
+.b-topbar
+{
+    display: none;
+}
+.b-topbar .topbar-inner
+{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    background: url("../img/headerBg.png") repeat-x scroll 0 0 #0073BC;
+}
+
+/*
+.b-topbar .container h3 a
+{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}*/
+
+.b-topbar .secondary-nav .dropdown ul.dropdown-menu
+{
+    background-color: #009fe3;
+}
+
+.b-topbar .secondary-nav .dropdown ul.dropdown-menu li a
+{
+    color: #fff
+}
+
+.b-topbar .secondary-nav .dropdown ul.dropdown-menu li.divider
+{
+    background-color: #0073BC;
+    border-color: #009fe3;
+}
+
+.b-topbar.topbar a
+{
+   color: #fff;
+}
+
+.b-topbar .topbar-inner .secondary-nav .dropdown.open .dropdown-toggle {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+}
