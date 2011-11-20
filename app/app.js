@@ -2,74 +2,87 @@ $(document).ready(function() {
     App = window.App
     App.init();
 
-    App.login = {};
-    App.login.$control = $('.b-login');
-    App.login.$button = App.login.$control.find('.primary')
-    App.login.$coupon = App.login.$control.find('.b-login__couponField')
-    App.login.$login = App.login.$control.find('.b-login__loginField')
-    App.login.$pass = App.login.$control.find('.b-login__passField')
-    App.login.$messages = App.login.$control.find('.alert-message')
-    App.login.$messagesClose = App.login.$messages.find('.close')
 
-    App.login.showMessage = function(kind) {
-        var message = App.login.$messages.filter('.' + kind);
-        App.login.$messages.hide();
-        message.fadeIn('fast')
-    }
+    App.loginView = Backbone.View.extend({
 
-    App.login.$messages.each(function() {
-        var _that = this
-        $(_that).find('.close').click(function(evt) {
+        el: $('.b-login'),
+
+        couponVal: function() {
+           return $(this.el).find('.b-login__couponField').val()
+        } ,
+        loginVal: function() {
+           return $(this.el).find('.b-login__loginField').val()
+        },
+
+        passVal: function() {
+           return  $(this.el).find('.b-login__passField').val()
+        },
+
+        messages: function() {
+           return $(this.el).find('.alert-message')
+        },
+
+        events: {
+            "click .primary": "checkForm",
+            "click .alert-message .close" : "messageClose"
+        },
+        checkForm: function(evt) {
+            var coupon = this.couponVal()
+            var login = this.loginVal()
+            var pass = this.passVal()
+
             evt.preventDefault()
-            $(_that).fadeOut('fast');
-        })
-    });
+            
+            if (coupon  == '' & login == '') {
+                return;
+            } else if (!(coupon == '')) {
+                return this.checkCoupon(coupon)
+            } else {
+                return this.authUser(login, pass)
+            }
 
-    App.login.$button.click(function(evt) {
-        evt.preventDefault();
-        App.login.checkForm()
-    })
+        },
 
-    App.login.checkForm = function() {
-        if (App.login.$coupon.val() == '' & App.login.$login.val() == '') {
-            return;
-        } else if (!(App.login.$coupon.val() == '')) {
-            return App.checkCoupon(App.login.$coupon.val())
-        } else {
-            return App.login.authUser(App.login.$login.val(), App.login.$pass.val())
-        }
-    }
+        showMessage: function(kind) {
+            var message = this.messages().filter('.' + kind);
+            this.messages().hide();
+            message.fadeIn('fast')
+        },
 
-    App.checkCoupon = function(coupon) {
-        if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
-            coupon = parseInt(coupon);
-            App.login.$messages.hide();
-        } else {
-            App.login.showMessage('warning');
-        }
-    }
+        messageClose: function(evt) {
+            evt.preventDefault()
+            $(evt.target).parents('.alert-message').fadeOut('fast');
+        },
 
+        checkCoupon: function(coupon) {
+            if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
+                coupon = parseInt(coupon);
+                $(this.messages()).hide();
+            } else {
+                this.showMessage('warning');
+            }
+        },
 
-    App.login.authUser = function(login, pass) {
-        var user = App.users.getByLogin(login);
-        if (user) {
-            if (user.get('password') == pass) {
-                if (!(App.state.get('currentUser') == login)) {
-                    App.login.$messages.hide();
-                    App.currentUser = App.users.getByLogin(login)
-                    App.state.save({'currentUser': App.currentUser.get('login'), 'currentUserID' : App.currentUser.get('id'), 'appState': 'catalog'});
-                    console.log(App.state.toJSON())
+        authUser: function(login, pass) {
+            var user = App.users.getByLogin(login);
+            if (user) {
+                if (user.get('password') == pass) {
+                    if (!(App.state.get('currentUser') == login)) {
+                        this.messages().hide();
+                        App.currentUser = App.users.getByLogin(login)
+                        App.state.save({'currentUser': App.currentUser.get('login'), 'currentUserID' : App.currentUser.get('id'), 'appState': 'catalog'});
+                        console.log(App.state.toJSON())
+                    }
+                } else {
+                    this.showMessage('error');
                 }
             } else {
-                App.login.showMessage('error');
+                this.showMessage('error');
             }
-        } else {
-            App.login.showMessage('error');
         }
+    })
 
-    }
-
-
+    App.login = new App.loginView;
 });
 
 var App = (function() {
