@@ -12,33 +12,6 @@
 </head>
 <body>
 <div class="b-app">
-    <div style="z-index: 5;" class="topbar-wrapper">
-        <div data-dropdown="dropdown" class="b-topbar topbar">
-            <div class="topbar-inner">
-                <div class="container">
-                    <h3><a href="#">Бумкарта</a></h3>
-                    <ul class="nav">
-                        <li class="active"><a href="#">Каталог</a></li>
-                        <li><a href="#">Специальные предложения</a></li>
-                        <li><a href="#">Доставка</a></li>
-                    </ul>
-                    <ul class="nav secondary-nav">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle b-topbar__currentUser" href="#">Dropdown</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Личная информация</a></li>
-                                <li><a href="#">История покупок</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Выйти</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /topbar-inner -->
-        </div>
-        <!-- /topbar -->
-    </div>
     <div class="b-state b-state_login">
         <div class="b-login container">
             <div class="b-login__i span12">
@@ -72,7 +45,8 @@
                                         <label class="b-login__label" for="loginName">Логин</label>
 
                                         <div class="input">
-                                            <input class="span5 b-login__loginField" placeholder="basvasilich" id="loginName"
+                                            <input class="span5 b-login__loginField" placeholder="basvasilich"
+                                                   id="loginName"
                                                    name="loginName" type="text">
                                         </div>
                                     </div>
@@ -80,7 +54,8 @@
                                         <label class="b-login__label" for="loginPass">Пароль</label>
 
                                         <div class="input">
-                                            <input class="span5 b-login__passField" placeholder="******" id="loginPass" name="loginPass"
+                                            <input class="span5 b-login__passField" placeholder="******" id="loginPass"
+                                                   name="loginPass"
                                                    type="password">
                                         </div>
                                     </div>
@@ -99,18 +74,50 @@
             <div class="b-login__error span12">
                 <div class="alert-message error">
                     <a href="#" class="close">×</a>
+
                     <p><strong>Неправильный логин или пароль</strong> попробуйте еще раз.</p>
                 </div>
                 <div class="alert-message warning">
                     <a href="#" class="close">×</a>
-                    <p><strong>У нас нет такого купона.</strong> Видимо вы ошиблись, проверьте правильно ли вы ввели его номер.
+
+                    <p><strong>У нас нет такого купона.</strong> Видимо вы ошиблись, проверьте правильно ли вы ввели его
+                        номер.
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="b-state b-state_profile">2</div>-->
-    <!--<div class="b-state b-state_catalog">3</div>-->
+    <div class="b-state b-state_app">
+        <div style="z-index: 5;" class="topbar-wrapper">
+            <div data-dropdown="dropdown" class="b-topbar topbar">
+                <div class="topbar-inner">
+                    <div class="container">
+                        <h3><a href="#">Бумкарта</a></h3>
+                        <ul class="nav">
+                            <li class="active"><a href="#">Каталог</a></li>
+                            <li><a href="#">Специальные предложения</a></li>
+                            <li><a href="#">Доставка</a></li>
+                        </ul>
+                        <ul class="nav secondary-nav">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle b-topbar__currentUser" href="#">Dropdown</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Личная информация</a></li>
+                                    <li><a href="#">История покупок</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#exit">Выйти</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /topbar-inner -->
+            </div>
+            <!-- /topbar -->
+        </div>
+        <div class="b-layout b-layout_profile container">Profile</div>
+        <div class="b-layout b-layout_catalog container">Catalog</div>
+    </div>
 </div>
 </div>
 </body>

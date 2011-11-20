@@ -1,7 +1,6 @@
 {
     "settings":
     {
-        "currentUser": "",
-        "appState": "login"
+       "defaultPage": "catalog"
     }
 }
