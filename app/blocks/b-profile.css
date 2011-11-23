@@ -2,4 +2,56 @@
 {
     background-color: #fff;
     padding-top: 40px;
+    padding-left: 20px;
+}
+
+.b-profile fieldset
+{
+    padding-top: 8px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.b-profile fieldset:last-of-type
+{
+    border-bottom: 0;
+}
+
+.b-profile__field label
+{
+    color: #888;
+}
+
+.b-profile__field
+{
+    min-height: 28px;
+    position: relative;
+}
+
+.b-profile__field .value
+{
+    position: absolute;
+    left: 156px;
+    top: 6px;
+    z-index: 3;
+    font-size: 18px;
+    
+}
+
+.b-profile_show .b-profile__field .input,
+.b-profile_show .b-profile__save,
+.b-profile__field .value,
+.b-profile__edit
+{
+    display: none;
+}
+
+.b-profile_show .b-profile__field .value
+{
+    display: block;
+}
+
+.b-profile_show .b-profile__edit
+{
+    display: block;
 }

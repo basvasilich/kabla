@@ -69,6 +69,10 @@ var App = (function() {
             App.currentUser = App.users.getByID(0)
         },
 
+        resetCurrentUser: function(){
+            App.currentUser = App.users.getByID(0);
+        },
+
         getLocalData: function(what) {
             var result;
             $.ajax({
@@ -114,8 +118,10 @@ $(document).ready(function() {
             }
         },
         doExit: function() {
+            App.resetCurrentUser()
             App.state.unset('currentUserLogin')
             App.state.save()
+
             $('.b-state_app').hide();
             $('.b-state_login').show();
             $('.b-layout').hide();
@@ -130,7 +136,7 @@ $(document).ready(function() {
 
         el: $('.b-login'),
 
-        initialize: function(){
+        initialize: function() {
             $(".b-login").setTemplateURL("app/tmpl/b-login.tpl");
             $(".b-login").processTemplate();
         },
@@ -206,7 +212,7 @@ $(document).ready(function() {
                         if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
                         App.router.navigate(App.state.get('defaultPage'), true)
                         App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                        App.control.updateUser();
+                        App.control.changeUser();
                     }
                 } else {
                     this.showMessage('error');
@@ -224,42 +230,100 @@ $(document).ready(function() {
         initialize: function() {
             $(".topbar-wrapper").setTemplateURL("app/tmpl/b-topbar.tpl");
             if (App.state.get('currentUserLogin')) {
-                 App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                 App.router.navigate(App.state.get('defaultPage'), true)
-                $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
+                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+                App.router.navigate(App.state.get('defaultPage'), true)
+                this.renderToolbar()
             }
-            this.model.bind('change:currentUserLogin', this.updateUser, this);
+            this.model.bind('change:currentUserLogin', this.changeUser, this);
+            App.currentUser.bind('change:name', this.changeName, this);
         },
 
-        updateUser: function() {
-            if (App.state.get('currentUserLogin')) {
-                App.profile.updateUser();
+        renderToolbar: function(){
+             $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
+             return this;
+        },
+
+        changeName: function(){
+            $(".b-topbar__currentUser").html(App.currentUser.get('name'));
+        },
+
+        changeUser: function(){
+            if(App.state.get('currentUserLogin')){
                 App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
+            } else {
+                App.resetCurrentUser()
             }
+            this.changeName();
+            App.profile.render();
         }
+
+
     })
     App.control = new App.AppView({model: App.state})
+    App.control.renderToolbar();
+
 
     App.profileView = Backbone.View.extend({
         el: $('.b-profile'),
 
         initialize: function() {
-            $(".b-profile").setTemplateURL("app/tmpl/b-profile.tpl");
-            $(".b-profile").processTemplate(App.currentUser.toJSON());
+            $(this.el).setTemplateURL("app/tmpl/b-profile.tpl");
+            App.currentUser.bind('change', this.render, this);
+        },
+
+        render: function(){
+
+            $(this.el).processTemplate(App.currentUser.toJSON());
             $('.datepicker').datepicker({
                 changeYear: true,
                 yearRange: '1960:2001'
             });
-            this.model.bind('change:currentUserLogin', this.updateUser, this);
-
+            return this;
         },
-        updateUser: function(){
+
+        events: {
+            "click .b-profile__save .primary": "saveForm",
+            "click .b-profile__edit .primary" : "showEditForm",
+            "click .b-profile__save .reset" : "hideEditForm"
+        },
+
+        updateUser: function() {
             $(".b-profile").processTemplate(App.currentUser.toJSON());
+        },
+
+        saveForm: function(evt) {
+            evt.preventDefault()
+            var data = $(this.el).find('form').serializeArray();
+            console.log(data)
+            var model = {
+                mobile: {}
+            }
+
+            $(data).each(function() {
+                 if (this.name == 'code') {
+                    model['mobile']['code'] = parseInt(this.value);
+                } else if (this.name == 'number'){
+                    model['mobile']['number'] = parseInt(this.value);
+                } else {
+                    model[this.name] = this.value;
+                }
+            })
+
+            App.currentUser.set(model);
+            App.currentUser.save();
+            this.hideEditForm()
+        },
+        showEditForm: function() {
+            $(this.el).removeClass('b-profile_show');
+        },
+        hideEditForm: function() {
+            console.log('fire')
+            $(this.el).addClass('b-profile_show');
         }
+
     })
 
-     App.profile = new App.profileView({model: App.currentUser})
-
+    App.profile = new App.profileView({model: App.currentUser})
+    App.profile.render();
 });
 
