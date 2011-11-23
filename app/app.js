@@ -62,6 +62,23 @@ var App = (function() {
                 })
             }
 
+            App.NotifyView = Backbone.View.extend({
+                el: $('.b-notify'),
+                initialize: function() {
+                    $(this.el).setTemplateURL("app/tmpl/b-notify.tpl");
+                },
+
+                render: function(params) {
+                    $(this.el).processTemplate(params);
+                },
+
+                kill: function() {
+                    $(this.el).remove();
+                }
+            })
+
+            App.notify = new App.NotifyView()
+
             console.log('Debug: initial data')
             console.log(App.users.toJSON())
             console.log(App.state.toJSON())
@@ -69,7 +86,7 @@ var App = (function() {
             App.currentUser = App.users.getByID(0)
         },
 
-        resetCurrentUser: function(){
+        resetCurrentUser: function() {
             App.currentUser = App.users.getByID(0);
         },
 
@@ -158,7 +175,6 @@ $(document).ready(function() {
 
         events: {
             "click .primary": "checkForm",
-            "click .alert-message .close" : "messageClose"
         },
         checkForm: function(evt) {
             var coupon = this.couponVal()
@@ -183,44 +199,42 @@ $(document).ready(function() {
             message.fadeIn('fast')
         },
 
-        messageClose: function(evt) {
-            evt.preventDefault()
-            $(evt.target).parents('.alert-message').fadeOut('fast');
-        },
-
         checkCoupon: function(coupon) {
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
                 $(this.messages()).hide();
                 var newUser = App.users.create({'balance': coupon})
-                App.state.save({'currentUserLogin': newUser.get('login')})
-                App.router.navigate(App.state.get('defaultPage'), true)
                 App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+                App.state.save({'currentUserLogin': newUser.get('login'), 'needFillProfile': true})
+                App.router.navigate(App.state.get('defaultPage'), true)
                 App.profile = new App.profileView({model: App.currentUser})
-            } else {
+            }
+            else {
                 this.showMessage('warning');
             }
         },
 
-        authUser: function(params) {
-            var user = App.users.getByLogin(params.login);
-            if (user) {
-                if (user.get('password') == params.pass) {
-                    if (!(App.state.get('currentUserLogin') == params.login)) {
-                        this.messages().hide();
-                        App.state.save({'currentUserLogin': params.login});
-                        if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
-                        App.router.navigate(App.state.get('defaultPage'), true)
-                        App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                        App.control.changeUser();
+        authUser
+                :
+                function(params) {
+                    var user = App.users.getByLogin(params.login);
+                    if (user) {
+                        if (user.get('password') == params.pass) {
+                            if (!(App.state.get('currentUserLogin') == params.login)) {
+                                this.messages().hide();
+                                App.state.save({'currentUserLogin': params.login});
+                                if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
+                                App.router.navigate(App.state.get('defaultPage'), true)
+                                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+                                App.control.changeUser();
+                            }
+                        } else {
+                            this.showMessage('error');
+                        }
+                    } else {
+                        this.showMessage('error');
                     }
-                } else {
-                    this.showMessage('error');
                 }
-            } else {
-                this.showMessage('error');
-            }
-        }
     })
     App.login = new App.LoginView;
 
@@ -234,21 +248,40 @@ $(document).ready(function() {
                 App.router.navigate(App.state.get('defaultPage'), true)
                 this.renderToolbar()
             }
+
+            if (App.state.get('needFillProfile')) {
+                App.notify.render({
+                    type: 'info',
+                    href: 'profile',
+                    text: "Добро пожаловать! Для начала заполните профильтр это поможет нам любить вас больше.",
+                    primary: 'Редактировать профиль'
+                })
+            }
+            $(this.el).removeClass('b-profile_show');
             this.model.bind('change:currentUserLogin', this.changeUser, this);
             App.currentUser.bind('change:name', this.changeName, this);
         },
 
-        renderToolbar: function(){
-             $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
-             return this;
+        events: {
+            "click .alert-message .close" : "messageClose"
         },
 
-        changeName: function(){
+        messageClose: function(evt) {
+            evt.preventDefault()
+            $(evt.target).parents('.alert-message').fadeOut('fast');
+        },
+
+        renderToolbar: function() {
+            $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
+            return this;
+        },
+
+        changeName: function() {
             $(".b-topbar__currentUser").html(App.currentUser.get('name'));
         },
 
-        changeUser: function(){
-            if(App.state.get('currentUserLogin')){
+        changeUser: function() {
+            if (App.state.get('currentUserLogin')) {
                 App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
             } else {
                 App.resetCurrentUser()
@@ -271,8 +304,8 @@ $(document).ready(function() {
             App.currentUser.bind('change', this.render, this);
         },
 
-        render: function(){
-
+        render: function() {
+            if (App.state.get('needFillProfile')) $(this.el).removeClass('b-profile_show');
             $(this.el).processTemplate(App.currentUser.toJSON());
             $('.datepicker').datepicker({
                 changeYear: true,
@@ -300,9 +333,9 @@ $(document).ready(function() {
             }
 
             $(data).each(function() {
-                 if (this.name == 'code') {
+                if (this.name == 'code') {
                     model['mobile']['code'] = parseInt(this.value);
-                } else if (this.name == 'number'){
+                } else if (this.name == 'number') {
                     model['mobile']['number'] = parseInt(this.value);
                 } else {
                     model[this.name] = this.value;
@@ -312,12 +345,12 @@ $(document).ready(function() {
             App.currentUser.set(model);
             App.currentUser.save();
             this.hideEditForm()
+            if (!(App.currentUser.get('name') == 'Гость')) App.state.set({'needFillProfile': false})
         },
         showEditForm: function() {
             $(this.el).removeClass('b-profile_show');
         },
         hideEditForm: function() {
-            console.log('fire')
             $(this.el).addClass('b-profile_show');
         }
 
@@ -325,5 +358,8 @@ $(document).ready(function() {
 
     App.profile = new App.profileView({model: App.currentUser})
     App.profile.render();
-});
+
+
+})
+        ;
 

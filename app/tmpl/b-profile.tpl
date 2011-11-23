@@ -77,5 +77,4 @@
     </div>
     <div class="span5">Здесь будет некий сайдбар</div>
 </div>
-
-        {#/template MAIN}
+{#/template MAIN}
