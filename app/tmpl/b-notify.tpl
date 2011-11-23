@@ -3,9 +3,9 @@
     <a href="#" class="close">×</a>
     <p>{$T.text}</p>
     <div class="alert-actions">
-      <a href="#" class="btn small primary">{$T.primary}</a>
+      <a href="{$T.href}" class="btn small primary">{$T.primary}</a>
       {#if $T.secondary}
-        <a href="{$T.href}" class="btn small secondary">$T.secondary</a>
+        <a href="#" class="btn small secondary">$T.secondary</a>
         {#/if}
     </div>
 </div>
