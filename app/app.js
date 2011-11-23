@@ -23,7 +23,12 @@ var App = (function() {
                         "name": "Гость",
                         "gender": "m",
                         "canEdit": true,
-                        "balance": 0
+                        "balance": 0,
+                        "mobile": {
+                            code: "",
+                            number:""
+                        },
+                        birth: ""
                     }
                 }
             });
@@ -61,7 +66,7 @@ var App = (function() {
             console.log(App.users.toJSON())
             console.log(App.state.toJSON())
             console.log('/Debug')
-
+            App.currentUser = App.users.getByID(0)
         },
 
         getLocalData: function(what) {
@@ -83,7 +88,7 @@ var App = (function() {
 $(document).ready(function() {
     App.init();
 
-     App.Workspace = Backbone.Router.extend({
+    App.Workspace = Backbone.Router.extend({
 
         routes: {
             "catalog":        "showCatalog",
@@ -92,7 +97,6 @@ $(document).ready(function() {
         },
 
         showCatalog: function() {
-            console.log('fire')
             if (App.state.get('currentUserLogin')) {
                 $('.b-state_login').hide();
                 $('.b-state_app').show();
@@ -109,7 +113,7 @@ $(document).ready(function() {
                 $('.b-layout_profile').show();
             }
         },
-        doExit: function(){
+        doExit: function() {
             App.state.unset('currentUserLogin')
             App.state.save()
             $('.b-state_app').hide();
@@ -125,6 +129,11 @@ $(document).ready(function() {
     App.LoginView = Backbone.View.extend({
 
         el: $('.b-login'),
+
+        initialize: function(){
+            $(".b-login").setTemplateURL("app/tmpl/b-login.tpl");
+            $(".b-login").processTemplate();
+        },
 
         couponVal: function() {
             return $(this.el).find('.b-login__couponField').val()
@@ -180,6 +189,8 @@ $(document).ready(function() {
                 var newUser = App.users.create({'balance': coupon})
                 App.state.save({'currentUserLogin': newUser.get('login')})
                 App.router.navigate(App.state.get('defaultPage'), true)
+                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+                App.profile = new App.profileView({model: App.currentUser})
             } else {
                 this.showMessage('warning');
             }
@@ -192,8 +203,10 @@ $(document).ready(function() {
                     if (!(App.state.get('currentUserLogin') == params.login)) {
                         this.messages().hide();
                         App.state.save({'currentUserLogin': params.login});
-                        if(params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
+                        if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
                         App.router.navigate(App.state.get('defaultPage'), true)
+                        App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+                        App.control.updateUser();
                     }
                 } else {
                     this.showMessage('error');
@@ -209,23 +222,44 @@ $(document).ready(function() {
         el: $('.b-app'),
 
         initialize: function() {
-            if(this.model.get('currentUserLogin')){
-                App.router.navigate(this.model.get('defaultPage'), true)
-                this.updateUser()
+            $(".topbar-wrapper").setTemplateURL("app/tmpl/b-topbar.tpl");
+            if (App.state.get('currentUserLogin')) {
+                 App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+                 App.router.navigate(App.state.get('defaultPage'), true)
+                $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
             }
             this.model.bind('change:currentUserLogin', this.updateUser, this);
         },
 
         updateUser: function() {
             if (App.state.get('currentUserLogin')) {
+                App.profile.updateUser();
                 App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                $('.b-topbar__currentUser').html(App.currentUser.get('name') ? App.currentUser.get('name') : "Пользователь")
+                $(".topbar-wrapper").processTemplate(App.currentUser.toJSON());
             }
         }
     })
     App.control = new App.AppView({model: App.state})
 
+    App.profileView = Backbone.View.extend({
+        el: $('.b-profile'),
 
+        initialize: function() {
+            $(".b-profile").setTemplateURL("app/tmpl/b-profile.tpl");
+            $(".b-profile").processTemplate(App.currentUser.toJSON());
+            $('.datepicker').datepicker({
+                changeYear: true,
+                yearRange: '1960:2001'
+            });
+            this.model.bind('change:currentUserLogin', this.updateUser, this);
+
+        },
+        updateUser: function(){
+            $(".b-profile").processTemplate(App.currentUser.toJSON());
+        }
+    })
+
+     App.profile = new App.profileView({model: App.currentUser})
 
 });
 

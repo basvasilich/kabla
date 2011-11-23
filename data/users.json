@@ -1,5 +1,13 @@
 { "users" :[
     {
+        "id": 0,
+        "login": "guest",
+        "password": "",
+        "name": "Гость",
+        "gender": "m",
+        "canEdit": false
+    },
+    {
         "id": 1,
         "login": "admin",
         "password": "admin",
@@ -17,11 +25,7 @@
             "number": "9225815"
         },
         "gender": "m",
-        "birth": {
-            "day": 16,
-            "month": 6,
-            "year": 1985
-        },
+        "birth": "16.06.1985",
         "canEdit": true,
         "balance": 2000,
         "history": {
@@ -38,11 +42,7 @@
             "number": "9264743"
         },
         "gender": "m",
-        "birth": {
-            "day": 15,
-            "month": 2,
-            "year": 1981
-        },
+        "birth": "15.02.1981",
         "canEdit": true,
         "balance": 12000,
         "history": {}
@@ -57,11 +57,7 @@
             "number": "9873210"
         },
         "gender": "f",
-        "birth": {
-            "day": 7,
-            "month": 12,
-            "year": 1990
-        },
+        "birth": "07.12.1990",
         "canEdit": true,
         "balance": 5000,
         "history": {}

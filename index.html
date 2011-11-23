@@ -6,6 +6,8 @@
     <script type="text/javascript" src="libs/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="libs/underscore-min.js"></script>
     <script type="text/javascript" src="libs/backbone-min.js"></script>
+    <script type="text/javascript" src="libs/jquery-jtemplates_uncompressed.js"></script>
+    <script type="text/javascript" src="libs/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="libs/libs.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
     <link type="text/css" rel="stylesheet" href="app/app.css">
@@ -13,110 +15,16 @@
 <body>
 <div class="b-app">
     <div class="b-state b-state_login">
-        <div class="b-login container">
-            <div class="b-login__i span12">
-                <form action="" class="form-stacked b-login__form">
-                    <div class="row">
-                        <div class="b-login__header">
-                            <img src="app/img/logo_boomcard.png" alt=""/>
-                        </div>
-                        <div class="row">
-                            <div class="b-login__note span6">
-                                <div class="b-login__note__i">
-                                    <fieldset>
-                                        <legend>У меня есть разовый купон</legend>
-                                        <p><em>Введите номер подарочного купона и получите доступ к куче всего
-                                            хорошего.</em></p>
-
-                                        <div class="clearfix">
-                                            <!--<label class="b-login__label" for="loginName"> Номер</label>-->
-                                            <div class="input">
-                                                <input class="b-login__couponField span5" placeholder="12345"
-                                                       id="loginCoupon" name="loginCoupon" type="text">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="span6">
-                                <fieldset class="b-login__sidebar">
-                                    <legend>Я постоянный пользователь</legend>
-                                    <div class="clearfix">
-                                        <label class="b-login__label" for="loginName">Логин</label>
-
-                                        <div class="input">
-                                            <input class="span5 b-login__loginField" placeholder="basvasilich"
-                                                   id="loginName"
-                                                   name="loginName" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">
-                                        <label class="b-login__label" for="loginPass">Пароль</label>
-
-                                        <div class="input">
-                                            <input class="span5 b-login__passField" placeholder="******" id="loginPass"
-                                                   name="loginPass"
-                                                   type="password">
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-
-                            </div>
-                        </div>
-                        <div class="actions b-login__actions">
-                            <button type="submit" class="btn large primary">Войти в моё личное пространство</button>
-                            <!--<span class="b-login__option-action">или <a href="#">зарегистрироваться</a></span>-->
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="b-login__error span12">
-                <div class="alert-message error">
-                    <a href="#" class="close">×</a>
-
-                    <p><strong>Неправильный логин или пароль</strong> попробуйте еще раз.</p>
-                </div>
-                <div class="alert-message warning">
-                    <a href="#" class="close">×</a>
-
-                    <p><strong>У нас нет такого купона.</strong> Видимо вы ошиблись, проверьте правильно ли вы ввели его
-                        номер.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <div class="b-login"></div>
     </div>
     <div class="b-state b-state_app">
-        <div style="z-index: 5;" class="topbar-wrapper">
-            <div data-dropdown="dropdown" class="b-topbar topbar">
-                <div class="topbar-inner">
-                    <div class="container">
-                        <h3><a href="#">Бумкарта</a></h3>
-                        <ul class="nav">
-                            <li class="active"><a href="#">Каталог</a></li>
-                            <li><a href="#">Специальные предложения</a></li>
-                            <li><a href="#">Доставка</a></li>
-                        </ul>
-                        <ul class="nav secondary-nav">
-                            <li class="dropdown">
-                                <a class="dropdown-toggle b-topbar__currentUser" href="#">Dropdown</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Личная информация</a></li>
-                                    <li><a href="#">История покупок</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#exit">Выйти</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /topbar-inner -->
-            </div>
-            <!-- /topbar -->
+        <div style="z-index: 5;" class="topbar-wrapper"></div>
+        <div class="b-layout b-layout_profile container">
+            <div class="b-profile">/div>
         </div>
-        <div class="b-layout b-layout_profile container">Profile</div>
-        <div class="b-layout b-layout_catalog container">Catalog</div>
+        <div class="b-layout b-layout_catalog container">
+            catalog
+        </div>
     </div>
 </div>
 </div>
