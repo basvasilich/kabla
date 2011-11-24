@@ -1,11 +1,11 @@
 {#template MAIN}
-<div class="alert-message block-message {$T.type} {$T.class}">
+<div class="alert-message block-message {$T.type} {$T.mode}">
     <a href="#" class="close">×</a>
     <p>{$T.text}</p>
     <div class="alert-actions">
       <a href="{$T.href}" class="btn small primary">{$T.primary}</a>
       {#if $T.secondary}
-        <a href="#" class="btn small secondary">$T.secondary</a>
+        <a href="#" class="btn small secondary secondary_close">{$T.secondary}</a>
         {#/if}
     </div>
 </div>

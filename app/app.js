@@ -12,7 +12,7 @@ var App = (function() {
 
 
             //drop localStorage if version in LS differ when in settings.json
-            if(!(App.state.get('version') == localSettings.version)){
+            if (!(App.state.get('version') == localSettings.version)) {
                 localStorage.clear();
                 App.state.clear();
                 App.state.save(localSettings)
@@ -63,7 +63,6 @@ var App = (function() {
             App.users.fetch();
 
 
-
             if (!(App.users.length > 0)) {
                 $(App.getLocalData('users')).each(function() {
                     App.users.create(this);
@@ -80,8 +79,19 @@ var App = (function() {
                     $(this.el).processTemplate(params);
                 },
 
-                kill: function() {
-                    $(this.el).remove();
+                events: {
+                    "click .alert-message .secondary_close": "messageClose"
+                },
+
+                messageClose: function(evt) {
+                    evt.preventDefault(),
+                        $(evt.target).parents('.alert-message').fadeOut('fast', function() {
+                            this.remove();
+                        })
+                },
+
+                killByMode: function(mode) {
+                    $(this.el).has('.' + mode).remove();
                 }
             })
 
@@ -126,7 +136,7 @@ $(document).ready(function() {
         },
 
         showCatalog: function() {
-            if (App.state.get('currentUserLogin')) {
+            if (App.state.get('currentUserID')) {
                 $('.b-state_login').hide();
                 $('.b-state_app').show();
                 $('.b-layout').hide();
@@ -135,7 +145,7 @@ $(document).ready(function() {
         },
 
         showProfile: function() {
-            if (App.state.get('currentUserLogin')) {
+            if (App.state.get('currentUserID')) {
                 $('.b-state_login').hide();
                 $('.b-state_app').show();
                 $('.b-layout').hide();
@@ -144,7 +154,7 @@ $(document).ready(function() {
         },
         doExit: function() {
             App.resetCurrentUser()
-            App.state.unset('currentUserLogin')
+            App.state.unset('currentUserID')
             App.state.save()
 
             $('.b-state_app').hide();
@@ -182,7 +192,7 @@ $(document).ready(function() {
         },
 
         events: {
-            "click .primary": "checkForm",
+            "click .primary": "checkForm"
         },
         checkForm: function(evt) {
             var coupon = this.couponVal()
@@ -212,8 +222,8 @@ $(document).ready(function() {
                 coupon = parseInt(coupon);
                 $(this.messages()).hide();
                 var newUser = App.users.create({'balance': coupon})
-                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                App.state.save({'currentUserLogin': newUser.get('login'), 'needFillProfile': true})
+                App.currentUser = App.users.getByID(App.state.get('currentUserID'))
+                App.state.save({'currentUserID': newUser.get('id')})
                 App.router.navigate(App.state.get('defaultPage'), true)
                 App.profile = new App.profileView({model: App.currentUser})
             }
@@ -222,27 +232,27 @@ $(document).ready(function() {
             }
         },
 
-        authUser
-                :
-                function(params) {
-                    var user = App.users.getByLogin(params.login);
-                    if (user) {
-                        if (user.get('password') == params.pass) {
-                            if (!(App.state.get('currentUserLogin') == params.login)) {
-                                this.messages().hide();
-                                App.state.save({'currentUserLogin': params.login});
-                                if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
-                                App.router.navigate(App.state.get('defaultPage'), true)
-                                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
-                                App.control.changeUser();
-                            }
-                        } else {
-                            this.showMessage('error');
+        authUser:
+            function(params) {
+                var user = App.users.getByLogin(params.login);
+                params.id = user.get('id');
+                if (user) {
+                    if (user.get('password') == params.pass) {
+                        if (!(App.state.get('currentUserID') == params.id)) {
+                            this.messages().hide();
+                            App.state.save({'currentUserID': params.id});
+                            if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
+                            App.router.navigate(App.state.get('defaultPage'), true)
+                            App.currentUser = App.users.getByID(App.state.get('currentUserID'))
+                            App.control.changeUser();
                         }
                     } else {
                         this.showMessage('error');
                     }
+                } else {
+                    this.showMessage('error');
                 }
+            }
     })
     App.login = new App.LoginView;
 
@@ -251,23 +261,17 @@ $(document).ready(function() {
 
         initialize: function() {
             $(".topbar-wrapper").setTemplateURL("app/tmpl/b-topbar.tpl");
-            if (App.state.get('currentUserLogin')) {
-                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+            if (App.state.get('currentUserID')) {
+                App.currentUser = App.users.getByID(App.state.get('currentUserID'))
                 App.router.navigate(App.state.get('defaultPage'), true)
                 this.renderToolbar()
             }
 
-            if (App.state.get('needFillProfile')) {
-                App.notify.render({
-                    type: 'info',
-                    href: '#profile',
-                    text: "Добро пожаловать! Для начала заполните профильтр это поможет нам лучше узнать вас и предлагать лучшие продукты и условия.",
-                    primary: 'Заполнить профиль',
-                    secondary: 'Нет, спасибо'
-                })
+            if (App.currentUser.get('needFillProfile')) {
+                this.fillProfileNotify();
             }
             $(this.el).removeClass('b-profile_show');
-            this.model.bind('change:currentUserLogin', this.changeUser, this);
+            this.model.bind('change:currentUserID', this.changeUser, this);
             App.currentUser.bind('change:name', this.changeName, this);
         },
 
@@ -290,13 +294,28 @@ $(document).ready(function() {
         },
 
         changeUser: function() {
-            if (App.state.get('currentUserLogin')) {
-                App.currentUser = App.users.getByLogin(App.state.get('currentUserLogin'))
+            if (App.state.get('currentUserID')) {
+                App.currentUser = App.users.getByID(App.state.get('currentUserID'))
             } else {
                 App.resetCurrentUser()
             }
             this.changeName();
+
+            if (App.currentUser.get('needFillProfile')) {
+                this.fillProfileNotify();
+            }
+
             App.profile.render();
+        },
+        fillProfileNotify: function() {
+            App.notify.render({
+                type: 'info',
+                mode: 'edit_profile',
+                href: '#profile',
+                text: "Добро пожаловать! Для начала заполните личную информацию, это поможет нам лучше узнать вас и предлагать лучшие продукты и условия. Телефон нужен для оперативной связи с вами.",
+                primary: 'Заполнить профиль',
+                secondary: 'Нет, спасибо'
+            })
         }
 
 
@@ -311,11 +330,26 @@ $(document).ready(function() {
         initialize: function() {
             $(this.el).setTemplateURL("app/tmpl/b-profile.tpl");
             App.currentUser.bind('change', this.render, this);
+
+
         },
 
         render: function() {
-            if (App.state.get('needFillProfile')) $(this.el).removeClass('b-profile_show');
+            if (App.currentUser.get('needFillProfile')) $(this.el).removeClass('b-profile_show');
             $(this.el).processTemplate(App.currentUser.toJSON());
+            $(this.el).find('.input_onlyDigits').keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                        event.preventDefault();
+                    }
+                }
+            });
+
             $('.datepicker').datepicker({
                 changeYear: true,
                 yearRange: '1960:2001'
@@ -343,9 +377,9 @@ $(document).ready(function() {
 
             $(data).each(function() {
                 if (this.name == 'code') {
-                    model['mobile']['code'] = parseInt(this.value);
+                    model['mobile']['code'] = this.value != '' ? parseInt(this.value) : 0;
                 } else if (this.name == 'number') {
-                    model['mobile']['number'] = parseInt(this.value);
+                    model['mobile']['number'] = this.value != '' ? parseInt(this.value) : 0;
                 } else {
                     model[this.name] = this.value;
                 }
@@ -354,7 +388,11 @@ $(document).ready(function() {
             App.currentUser.set(model);
             App.currentUser.save();
             this.hideEditForm()
-            if (!(App.currentUser.get('name') == 'Гость')) App.state.set({'needFillProfile': false})
+            if (!(App.currentUser.get('name') == 'Гость')) {
+                console.log(App.currentUser)
+                App.currentUser.save({'needFillProfile': false})
+                App.notify.killByMode('edit_profile')
+            }
         },
         showEditForm: function() {
             $(this.el).removeClass('b-profile_show');
@@ -370,5 +408,5 @@ $(document).ready(function() {
 
 
 })
-        ;
+    ;
 

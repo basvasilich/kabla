@@ -1,7 +1,7 @@
 {#template MAIN}
 <div class="row">
     <div class="span9">
-        <h2>Профиль</h2>
+        <h3>Личная информация</h3ß>
         <form>
             <fieldset>
                 <div class="b-profile__field clearfix">
@@ -37,12 +37,12 @@
                 <div class="b-profile__field clearfix">
                     <label for="code">Телефон</label>
 
-                    <div class="value">+7 ({$T.mobile.code}) {$T.mobile.number}</div>
+                    <div class="value">{#if $T.mobile.code == '0' || $T.mobile.code == '0'}Не указан{#else}+7 ({$T.mobile.code}) {$T.mobile.number}{#/if}</div>
                     <div class="input">
                         +7 ( <input type="text" value="{#if $T.mobile.code}{$T.mobile.code}{#/if}" maxlength="3"
-                                    name="code" id="code" class="span1"/> )
+                                    name="code" id="code" class="span1 input_onlyDigits"/> )
                         <input type="text" value="{#if $T.mobile.number}{$T.mobile.number}{#/if}" maxlength="7"
-                               name="number" id="number" class="span2"/>
+                               name="number" id="number" class="span2 input_onlyDigits"/>
                     </div>
                 </div>
                 <div class="b-profile__field clearfix">
@@ -70,7 +70,7 @@
                 <button class="btn reset" type="reset">Отменить</button>
             </div>
             <div class="actions b-profile__edit">
-                <input type="button" value="Редактировать профиль" class="btn primary">&nbsp;
+                <input type="button" value="Редактировать" class="btn primary">&nbsp;
             </div>
         </form>
         <h1></h1>

@@ -4,7 +4,8 @@
 @import url(blocks/b-login.css);
 @import url(blocks/b-topbar.css);
 @import url(blocks/b-profile.css);
-@import url(blocks/b-profile.css);
+@import url(blocks/b-catalog.css);
+@import url(blocks/b-notify.css);
 @import url(../libs/bootstrap.css);
 @import url(../libs/jquery-ui-1.8.16.custom.css);
 
