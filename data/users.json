@@ -5,7 +5,8 @@
         "password": "",
         "name": "Гость",
         "gender": "m",
-        "canEdit": false
+        "canEdit": false,
+        "needFillProfile": false
     },
     {
         "id": 1,
@@ -13,7 +14,8 @@
         "password": "admin",
         "name": "Администратор",
         "gender": "m",
-        "canEdit": false
+        "canEdit": false,
+        "needFillProfile": false
     },
     {
         "id": 2,
@@ -28,9 +30,8 @@
         "birth": "16.06.1985",
         "canEdit": true,
         "balance": 2000,
-        "history": {
-
-        }
+        "history": {},
+        "needFillProfile": false
     },
     {
         "id": 3,
@@ -45,7 +46,8 @@
         "birth": "15.02.1981",
         "canEdit": true,
         "balance": 12000,
-        "history": {}
+        "history": {},
+        "needFillProfile": false
     },
     {
         "id": 4,
@@ -60,7 +62,8 @@
         "birth": "07.12.1990",
         "canEdit": true,
         "balance": 5000,
-        "history": {}
+        "history": {},
+        "needFillProfile": false
     }
 ]
 }

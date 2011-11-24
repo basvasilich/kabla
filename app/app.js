@@ -2,17 +2,22 @@ var App = (function() {
     return {
         init: function() {
 
-            //
+            localSettings = App.getLocalData('settings')
             App.Model = Backbone.Model.extend({
-                localStorage: new Store("appState"),
-                defaults: function() {
-                    var result = App.getLocalData('settings')
-                    return result;
-                }
+                localStorage: new Store("appState")
             });
 
             App.state = new App.Model({ id: 1 });
             App.state.fetch();
+
+
+            //drop localStorage if version in LS differ when in settings.json
+            if(!(App.state.get('version') == localSettings.version)){
+                localStorage.clear();
+                App.state.clear();
+                App.state.save(localSettings)
+            }
+
 
             App.User = Backbone.Model.extend({
                 defaults: function() {
@@ -28,7 +33,8 @@ var App = (function() {
                             code: "",
                             number:""
                         },
-                        birth: ""
+                        birth: "",
+                        needFillProfile: true
                     }
                 }
             });
@@ -55,6 +61,8 @@ var App = (function() {
 
             App.users = new App.UsersCollection
             App.users.fetch();
+
+
 
             if (!(App.users.length > 0)) {
                 $(App.getLocalData('users')).each(function() {
@@ -252,9 +260,10 @@ $(document).ready(function() {
             if (App.state.get('needFillProfile')) {
                 App.notify.render({
                     type: 'info',
-                    href: 'profile',
-                    text: "Добро пожаловать! Для начала заполните профильтр это поможет нам любить вас больше.",
-                    primary: 'Редактировать профиль'
+                    href: '#profile',
+                    text: "Добро пожаловать! Для начала заполните профильтр это поможет нам лучше узнать вас и предлагать лучшие продукты и условия.",
+                    primary: 'Заполнить профиль',
+                    secondary: 'Нет, спасибо'
                 })
             }
             $(this.el).removeClass('b-profile_show');

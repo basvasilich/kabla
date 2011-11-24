@@ -1,6 +1,7 @@
 {
     "settings":
     {
-       "defaultPage": "catalog"
+       "defaultPage": "catalog",
+        "version": "0.04"
     }
 }
