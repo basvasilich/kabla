@@ -1,7 +1,7 @@
 {#template MAIN}
 <div class="alert-message block-message {$T.type} {$T.mode}">
     <a href="#" class="close">×</a>
-    <p>{$T.text}</p>
+    {$T.body}
     <div class="alert-actions">
       <a href="{$T.href}" class="btn small primary">{$T.primary}</a>
       {#if $T.secondary}

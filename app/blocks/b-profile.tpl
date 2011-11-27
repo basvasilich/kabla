@@ -1,6 +1,6 @@
 {#template MAIN}
 <div class="row">
-    <div class="span9">
+    <div class="span10">
         <h2>Личная информация</h2>
         <form>
             <fieldset>
@@ -75,6 +75,8 @@
         </form>
         <h1></h1>
     </div>
-    <div class="span5">Здесь будет некий сайдбар</div>
+    <div class="span5">
+    <div class="b-balance"></div>
+    </div>
 </div>
 {#/template MAIN}

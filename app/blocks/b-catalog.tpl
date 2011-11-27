@@ -19,6 +19,9 @@
                 подарочного сертификаты мы уже обеспечили.</p>
         </div>
     </div>
+    <div class="span5">
+        <div class="b-balance"></div>
+    </div>
 </div>
 
 <div id="partners-list">
@@ -185,7 +188,7 @@
     </div>
     <div class="partner-form">
         <div class="card-form">
-           <a class="btn large">Купить карту</a>
+            <a class="btn large">Купить карту</a>
         </div>
     </div>
 
