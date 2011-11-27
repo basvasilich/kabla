@@ -72,7 +72,7 @@ var App = (function() {
             App.NotifyView = Backbone.View.extend({
                 el: $('.b-notify'),
                 initialize: function() {
-                    $(this.el).setTemplateURL("app/tmpl/b-notify.tpl");
+                    $(this.el).setTemplateURL("app/blocks/b-notify.tpl", [], {filter_data: false, filter_params: false});
                 },
 
                 render: function(params) {
@@ -141,6 +141,8 @@ $(document).ready(function() {
                 $('.b-state_app').show();
                 $('.b-layout').hide();
                 $('.b-layout_catalog').show();
+                $('.b-topbar__nav li').removeClass('active');
+                $('.b-topbar__nav li.catalog').addClass('active');
             }
         },
 
@@ -150,6 +152,7 @@ $(document).ready(function() {
                 $('.b-state_app').show();
                 $('.b-layout').hide();
                 $('.b-layout_profile').show();
+                $('.b-topbar__nav li').removeClass('active');
             }
         },
         doExit: function() {
@@ -172,7 +175,7 @@ $(document).ready(function() {
         el: $('.b-login'),
 
         initialize: function() {
-            $(".b-login").setTemplateURL("app/tmpl/b-login.tpl");
+            $(".b-login").setTemplateURL("app/blocks/b-login.tpl");
             $(".b-login").processTemplate();
         },
 
@@ -225,7 +228,6 @@ $(document).ready(function() {
                 App.currentUser = App.users.getByID(App.state.get('currentUserID'))
                 App.state.save({'currentUserID': newUser.get('id')})
                 App.router.navigate(App.state.get('defaultPage'), true)
-                App.profile = new App.profileView({model: App.currentUser})
             }
             else {
                 this.showMessage('warning');
@@ -260,7 +262,8 @@ $(document).ready(function() {
         el: $('.b-app'),
 
         initialize: function() {
-            $(".topbar-wrapper").setTemplateURL("app/tmpl/b-topbar.tpl");
+            $(".topbar-wrapper").setTemplateURL("app/blocks/b-topbar.tpl");
+
             if (App.state.get('currentUserID')) {
                 App.currentUser = App.users.getByID(App.state.get('currentUserID'))
                 App.router.navigate(App.state.get('defaultPage'), true)
@@ -289,6 +292,12 @@ $(document).ready(function() {
             return this;
         },
 
+         renderBalance: function() {
+            $(".b-balance").setTemplateURL("app/blocks/b-balance.tpl");
+            $(".b-balance").processTemplate(App.currentUser.toJSON());
+            return this;
+        },
+
         changeName: function() {
             $(".b-topbar__currentUser").html(App.currentUser.get('name'));
         },
@@ -312,7 +321,7 @@ $(document).ready(function() {
                 type: 'info',
                 mode: 'edit_profile',
                 href: '#profile',
-                text: "Добро пожаловать! Для начала заполните личную информацию, это поможет нам лучше узнать вас и предлагать лучшие продукты и условия. Телефон нужен для оперативной связи с вами.",
+                body: "<h2>Добро пожаловать!</h2><p>Для начала заполните личную информацию, это поможет нам лучше узнать вас и предлагать лучшие продукты и условия. Телефон нужен для оперативной связи с вами.</p>",
                 primary: 'Заполнить профиль',
                 secondary: 'Нет, спасибо'
             })
@@ -324,11 +333,11 @@ $(document).ready(function() {
     App.control.renderToolbar();
 
 
-    App.profileView = Backbone.View.extend({
+    App.ProfileView = Backbone.View.extend({
         el: $('.b-profile'),
 
         initialize: function() {
-            $(this.el).setTemplateURL("app/tmpl/b-profile.tpl");
+            $(this.el).setTemplateURL("app/blocks/b-profile.tpl");
             App.currentUser.bind('change', this.render, this);
 
 
@@ -337,6 +346,7 @@ $(document).ready(function() {
         render: function() {
             if (App.currentUser.get('needFillProfile')) $(this.el).removeClass('b-profile_show');
             $(this.el).processTemplate(App.currentUser.toJSON());
+            App.control.renderBalance();
             $(this.el).find('.input_onlyDigits').keydown(function(event) {
                 // Allow only backspace and delete
                 if (event.keyCode == 46 || event.keyCode == 8) {
@@ -403,19 +413,20 @@ $(document).ready(function() {
 
     })
 
-    App.profile = new App.profileView({model: App.currentUser})
+    App.profile = new App.ProfileView({model: App.currentUser})
     App.profile.render();
 
-    App.catalogView = Backbone.View.extend({
+    App.CatalogView = Backbone.View.extend({
         el: $('.b-catalog'),
 
         initialize: function() {
-            $(this.el).setTemplateURL("app/tmpl/b-catalog.tpl");
+            $(this.el).setTemplateURL("app/blocks/b-catalog.tpl");
 //            App.currentUser.bind('change', this.render, this);
         },
 
         render: function() {
             $(this.el).processTemplate();
+            App.control.renderBalance();
             return this;
         },
 
@@ -430,7 +441,7 @@ $(document).ready(function() {
 
     })
 
-    App.catalog = new App.catalogView()
+    App.catalog = new App.CatalogView()
     App.catalog.render()
 
 });

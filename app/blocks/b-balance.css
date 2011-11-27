@@ -1,0 +1,32 @@
+.b-balance
+{
+   float: right;
+    margin-right: -20px;
+}
+
+.b-balance .value
+{
+    /*width: 100%;*/
+    background-color: rgba(70, 165, 70, 0.7) ;
+    color: #FFF;
+    padding: 20px 40px;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 4px;
+    /* Gecko (Firefox) */
+    -moz-border-radius: 4px;
+    /* WebKit (Safari/Chrome) */
+    -webkit-border-radius: 4px;
+    /* KHTML (Konquerer) */
+    -khtml-border-radius: 4px;
+
+     box-shadow: 0 2px 1px rgba(0, 0, 0, 0.3);
+    background-image: -moz-linear-gradient(center top , #3e933e, #46a546);
+}
+
+.b-balance .value .balls
+{
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+}
