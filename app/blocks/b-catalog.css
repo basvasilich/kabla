@@ -1,4 +1,108 @@
-.b-catalog
-{
+.b-catalog {
     padding: 20px;
+}
+
+.b-catalog__i {
+    z-index: 2;
+    position: relative;
+}
+
+.b-catalog__promo
+{
+    padding-left: 140px;
+    padding-top: 20px;
+}
+
+
+.b-catalog__promo .bg {
+    background: url('../img/cards/promo-partnercards.png');
+    height: 192px;
+    left: -65px;
+    position: absolute;
+    top: 60px;
+    width: 190px;
+
+}
+
+#partners-list {
+    padding: 30px 0 25px;
+}
+
+.partners-row {
+    border-top: 1px solid #F1F2F0;
+    padding: 20px 0;
+    position: relative;
+}
+
+#partners-list .partners-row .popup-window {
+    left: 20px;
+    top: 20px;
+}
+
+.partners-row-first {
+    border-top: 0 none;
+}
+
+.ie7 .partners-row {
+}
+
+.ie6 .partners-row {
+}
+
+.partners-row:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+.partner-pic {
+    float: left;
+    text-align: center;
+    width: 25%;
+}
+
+.partner-pic img {
+    margin-top: 5px;
+}
+
+.partner-text {
+    float: left;
+    width: 40%;
+}
+
+.partner-text p {
+    font-size: 120%;
+    line-height: 1.4em;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.partner-text p a {
+    color: #213589;
+}
+
+.partner-text .sm {
+    margin: -1em 5px;
+    position: relative;
+}
+
+.partner-form {
+    float: right;
+    width: 25%;
+}
+
+.partner-form .card-form {
+    margin-top: 5px;
+}
+
+@font-face {
+    font-family: "ALSRublRegular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?y¦"), url("rouble-webfont.woff") format("woff"), url("rouble-webfont.ttf") format("truetype");
+}
+
+.rub {
+    font-family: 'ALSRublRegular';
+    font-style: normal;
 }

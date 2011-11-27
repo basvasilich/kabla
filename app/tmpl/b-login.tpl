@@ -17,8 +17,8 @@
                                 <div class="clearfix">
                                     <!--<label class="b-login__label" for="loginName"> Номер</label>-->
                                     <div class="input">
-                                        <input class="b-login__couponField span5" placeholder="12345"
-                                               id="loginCoupon" name="loginCoupon" type="text" />
+                                        <input class="b-login__couponField span5" placeholder="1000"
+                                               id="loginCoupon" maxlength="6" name="loginCoupon" type="text" />
                                     </div>
                                 </div>
                             </fieldset>

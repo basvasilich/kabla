@@ -406,7 +406,32 @@ $(document).ready(function() {
     App.profile = new App.profileView({model: App.currentUser})
     App.profile.render();
 
+    App.catalogView = Backbone.View.extend({
+        el: $('.b-catalog'),
 
-})
-    ;
+        initialize: function() {
+            $(this.el).setTemplateURL("app/tmpl/b-catalog.tpl");
+//            App.currentUser.bind('change', this.render, this);
+        },
+
+        render: function() {
+            $(this.el).processTemplate();
+            return this;
+        },
+
+        events: {
+//            "click .b-profile__save .primary": "saveForm",
+//            "click .b-profile__edit .primary" : "showEditForm",
+//            "click .b-profile__save .reset" : "hideEditForm"
+        }
+
+
+
+
+    })
+
+    App.catalog = new App.catalogView()
+    App.catalog.render()
+
+});
 
