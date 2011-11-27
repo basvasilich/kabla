@@ -30,8 +30,8 @@ var App = (function() {
                         "canEdit": true,
                         "balance": 0,
                         "mobile": {
-                            code: "",
-                            number:""
+                            code: 0,
+                            number: 0
                         },
                         birth: "",
                         needFillProfile: true
