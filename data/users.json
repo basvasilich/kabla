@@ -6,7 +6,8 @@
         "name": "Гость",
         "gender": "m",
         "canEdit": false,
-        "needFillProfile": false
+        "needFillProfile": false,
+        "email": ""
     },
     {
         "id": 1,
@@ -31,7 +32,8 @@
         "canEdit": true,
         "balance": 2000,
         "history": {},
-        "needFillProfile": false
+        "needFillProfile": false,
+        "email": "basvasilich@yandex.ru"
     },
     {
         "id": 3,

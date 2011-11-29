@@ -26,6 +26,7 @@ var App = (function() {
                         "login": "user" + App.users.nextOrder(),
                         "password": "user" + App.users.nextOrder(),
                         "name": "Гость",
+                        "email": "",
                         "gender": "m",
                         "canEdit": true,
                         "balance": 0,
@@ -33,6 +34,7 @@ var App = (function() {
                             code: 0,
                             number: 0
                         },
+                        "shippingAddress": "",
                         birth: "",
                         needFillProfile: true
                     }
@@ -273,7 +275,6 @@ $(document).ready(function() {
             if (App.currentUser.get('needFillProfile')) {
                 this.fillProfileNotify();
             }
-            $(this.el).removeClass('b-profile_show');
             this.model.bind('change:currentUserID', this.changeUser, this);
             App.currentUser.bind('change:name', this.changeName, this);
         },
@@ -421,21 +422,57 @@ $(document).ready(function() {
 
         initialize: function() {
             $(this.el).setTemplateURL("app/blocks/b-catalog.tpl");
-//            App.currentUser.bind('change', this.render, this);
+            App.currentUser.bind('change:shippingAddress', this.render, this);
+
+
+
+
         },
 
         render: function() {
-            $(this.el).processTemplate();
+            $(this.el).processTemplate(App.currentUser.toJSON());
             App.control.renderBalance();
             return this;
         },
 
         events: {
-//            "click .b-profile__save .primary": "saveForm",
-//            "click .b-profile__edit .primary" : "showEditForm",
+            "click .partners-row .partner-form .btn": "initShipping"
+//            "click " : "hideShipping"
 //            "click .b-profile__save .reset" : "hideEditForm"
-        }
+        },
+        initShipping: function(evt){
+            var modalControl = $('#modal-shipping');
+            var primary = $('#modal-shipping').find('.primary');
+            var secondary = $('#modal-shipping').find('.secondary');
+            var step1 = $('#modal-shipping').find('.step1');
+            var step2 = $('#modal-shipping').find('.step2');
+            var address = $('#modal-shipping #shippingAddress')
+            step1.show();
+            step2.hide();
 
+            modalControl.find('.pic').html($(evt.target).parents('.partners-row').find('.partner-pic a').html())
+            modalControl.modal({
+                keyboard: true,
+                backdrop: true,
+                show: true
+
+            })
+            secondary.click(function(evt){
+                evt.preventDefault()
+                modalControl.modal('hide');
+            })
+            primary.click(function(evt){
+                evt.preventDefault()
+                if(address.val() == ""){
+                    adress.focus()
+                } else {
+                    App.currentUser.save({"shippingAddress": address.val()})
+                    step1.hide();
+                    step2.show();
+                }
+
+            })
+        }
 
 
 

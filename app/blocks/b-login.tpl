@@ -10,8 +10,8 @@
                     <div class="b-login__note span6">
                         <div class="b-login__note__i">
                             <fieldset>
-                                <legend>У меня есть разовый купон</legend>
-                                <p><em>Введите номер подарочного купона и получите доступ к куче всего
+                                <legend>У меня есть разовый сертификат</legend>
+                                <p><em>Введите номер сертификата «Карт Бланш» и получите доступ к куче всего
                                     хорошего.</em></p>
 
                                 <div class="clearfix">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="actions b-login__actions">
-                    <button type="submit" class="btn large primary">Войти в моё личное пространство</button>
+                    <button type="submit" class="btn large primary">Войти</button>
                     <!--<span class="b-login__option-action">или <a href="#">зарегистрироваться</a></span>-->
                 </div>
             </div>

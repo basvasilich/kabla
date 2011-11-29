@@ -3,3 +3,13 @@
 
     /*height: 100%;*/
 }
+
+#modal-shipping .step2
+{
+    display: none;
+}
+
+#modal-shipping .address
+{
+    font-size: 18px;
+}
