@@ -104,6 +104,7 @@
             и высокое качество. </p>
 
     </p>
+    </div>
 <div class="partner-form">
     <div class="card-form">
         <a class="btn large">Выбрать</a>
