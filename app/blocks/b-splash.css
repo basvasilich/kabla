@@ -1,0 +1,20 @@
+.b-splash
+{
+    margin:  40px
+
+}
+
+.b-splash .start,
+.b-splash .finish
+{
+    position: relative;
+    padding-left: 420px;
+    min-height: 400px
+}
+
+.b-splash .pic
+{
+    top: 0;
+    left: 0;
+    position: absolute;
+}

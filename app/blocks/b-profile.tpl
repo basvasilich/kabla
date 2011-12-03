@@ -111,11 +111,11 @@
 <div class="b-profile__actions">
 <div class="b-profile__actions__i">
     <div class="actions b-profile__save">
-        <input type="submit" value="Сохранить" class="btn primary">&nbsp;
-        <button class="btn reset" type="reset">Отменить</button>
+        <input type="submit" value="Сохранить, и перейти к выбору подарка" class="btn large span7 primary">&nbsp;
+        <button class="btn large reset" type="reset">Отменить</button>
     </div>
     <div class="actions b-profile__edit">
-        <input type="button" value="Редактировать" class="btn primary">&nbsp;
+        <input type="button" value="Редактировать" class="btn large primary">&nbsp;
     </div>
 </div>
 </div>

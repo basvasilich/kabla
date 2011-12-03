@@ -1,0 +1,21 @@
+.b-wizard-nav li
+{
+    font-size: 18px;
+}
+
+.b-wizard-nav .breadcrumb
+{
+    margin: 20px;
+}
+
+.b-wizard-nav .breadcrumb b,
+.b-wizard-nav .breadcrumb a
+{
+    font-weight: 400;
+    color: #a1a1a1;
+}
+
+.b-wizard-nav .breadcrumb .active b
+{
+    color: #404040;
+}

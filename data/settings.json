@@ -1,7 +1,8 @@
 {
     "settings":
     {
-       "defaultPage": "catalog",
-        "version": "0.14"
+        "defaultPage": "catalog",
+        "version": "0.15",
+        "welcomeMode": "wizard"
     }
 }

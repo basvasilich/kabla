@@ -13,3 +13,8 @@
 {
     font-size: 18px;
 }
+
+.b-app_wizardMode .b-topbar__nav
+{
+    display: none;
+}

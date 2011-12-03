@@ -98,11 +98,7 @@ var App = (function() {
             })
 
             App.notify = new App.NotifyView()
-
-            console.log('Debug: initial data')
-            console.log(App.users.toJSON())
-            console.log(App.state.toJSON())
-            console.log('/Debug')
+            if (App.state.get('welcomeMode') == 'wizard') App.wizardMode = true
             App.currentUser = App.users.getByID(0)
         },
 
@@ -129,9 +125,52 @@ var App = (function() {
 $(document).ready(function() {
     App.init();
 
+        if (App.wizardMode) {
+        App.WizardNav = Backbone.View.extend({
+            el: $('.b-wizard-nav'),
+
+            initialize: function() {
+                $(this.el).setTemplateURL("app/blocks/b-wizard-nav.tpl");
+            },
+
+            render: function() {
+                $(this.el).processTemplate();
+                return this;
+            },
+            activeTab: function(tab){
+                console.log($(this.el).find('.'+ tab))
+                $(this.el).find('li').removeClass('active')
+                $(this.el).find('.'+ tab).addClass('active');
+            }
+        })
+
+        App.wizardNav = new App.WizardNav()
+        App.wizardNav.render()
+
+        App.SplashView = Backbone.View.extend({
+            el: $('.b-splash'),
+
+            initialize: function() {
+                $(this.el).setTemplateURL("app/blocks/b-splash.tpl");
+            },
+
+            render: function(params) {
+                params = params || {finish: false}
+                $(this.el).processTemplate(params);
+                return this;
+            }
+
+        })
+
+        App.splash = new App.SplashView()
+        App.splash.render()
+
+    }
+
     App.Workspace = Backbone.Router.extend({
 
         routes: {
+            "splash":        "showSplash",
             "catalog":        "showCatalog",
             "profile":        "showProfile",
             "exit":        "doExit"
@@ -145,6 +184,7 @@ $(document).ready(function() {
                 $('.b-layout_catalog').show();
                 $('.b-topbar__nav li').removeClass('active');
                 $('.b-topbar__nav li.catalog').addClass('active');
+                if(App.wizardMode) App.wizardNav.activeTab('catalog')
             }
         },
 
@@ -155,6 +195,17 @@ $(document).ready(function() {
                 $('.b-layout').hide();
                 $('.b-layout_profile').show();
                 $('.b-topbar__nav li').removeClass('active');
+                if(App.wizardMode) App.wizardNav.activeTab('profile')
+            }
+        },
+
+        showSplash: function() {
+            if (App.state.get('currentUserID')) {
+                $('.b-state_login').hide();
+                $('.b-state_app').show();
+                $('.b-layout').hide();
+                $('.b-layout_splash').show();
+                if(App.wizardMode) App.wizardNav.activeTab('splash_start')
             }
         },
         doExit: function() {
@@ -222,6 +273,7 @@ $(document).ready(function() {
             message.fadeIn('fast')
         },
 
+
         checkCoupon: function(coupon) {
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
@@ -229,7 +281,7 @@ $(document).ready(function() {
                 var newUser = App.users.create({'balance': coupon})
                 App.currentUser = App.users.getByID(App.state.get('currentUserID'))
                 App.state.save({'currentUserID': newUser.get('id')})
-                App.router.navigate(App.state.get('defaultPage'), true)
+                App.control.showFirstPage()
             }
             else {
                 this.showMessage('warning');
@@ -246,9 +298,9 @@ $(document).ready(function() {
                             this.messages().hide();
                             App.state.save({'currentUserID': params.id});
                             if (params.coupon) user.set({ balance: user.get('balance') + parseInt(params.coupon)})
-                            App.router.navigate(App.state.get('defaultPage'), true)
                             App.currentUser = App.users.getByID(App.state.get('currentUserID'))
                             App.control.changeUser();
+                            App.control.showFirstPage()
                         }
                     } else {
                         this.showMessage('error');
@@ -268,15 +320,24 @@ $(document).ready(function() {
 
             if (App.state.get('currentUserID')) {
                 App.currentUser = App.users.getByID(App.state.get('currentUserID'))
-                App.router.navigate(App.state.get('defaultPage'), true)
                 this.renderToolbar()
+                this.showFirstPage()
             }
 
-            if (App.currentUser.get('needFillProfile')) {
+            if (App.currentUser.get('needFillProfile') && !App.wizardMode) {
                 this.fillProfileNotify();
+            } else if (App.wizardMode) {
+                $(this.el).addClass('b-app_wizardMode')
             }
+
+
             this.model.bind('change:currentUserID', this.changeUser, this);
             App.currentUser.bind('change:name', this.changeName, this);
+
+            console.log('Debug: initial data')
+            console.log(App.currentUser.toJSON())
+            console.log(App.state.toJSON())
+            console.log('/Debug')
         },
 
         events: {
@@ -293,7 +354,7 @@ $(document).ready(function() {
             return this;
         },
 
-         renderBalance: function() {
+        renderBalance: function() {
             $(".b-balance").setTemplateURL("app/blocks/b-balance.tpl");
             $(".b-balance").processTemplate(App.currentUser.toJSON());
             return this;
@@ -311,12 +372,13 @@ $(document).ready(function() {
             }
             this.changeName();
 
-            if (App.currentUser.get('needFillProfile')) {
+            if (App.currentUser.get('needFillProfile') && !App.wizardMode) {
                 this.fillProfileNotify();
             }
 
             App.profile.render();
         },
+
         fillProfileNotify: function() {
             App.notify.render({
                 type: 'info',
@@ -326,7 +388,17 @@ $(document).ready(function() {
                 primary: 'Заполнить профиль',
                 secondary: 'Нет, спасибо'
             })
-        }
+        },
+
+        showFirstPage: function(){
+             if(App.wizardMode && App.currentUser.get('needFillProfile')){
+                    App.splash.render()
+                    App.router.navigate('splash', true)
+                    App.wizardNav.activeTab('splash_start')
+                } else {
+                    App.router.navigate(App.state.get('defaultPage'), true)
+                }
+        },
 
 
     })
@@ -402,8 +474,9 @@ $(document).ready(function() {
             if (!(App.currentUser.get('name') == 'Гость')) {
                 console.log(App.currentUser)
                 App.currentUser.save({'needFillProfile': false})
-                App.notify.killByMode('edit_profile')
+                App.notify.killByMode('edit_profile');
             }
+            App.router.navigate('catalog', true)
         },
         showEditForm: function() {
             $(this.el).removeClass('b-profile_show');
@@ -422,16 +495,15 @@ $(document).ready(function() {
 
         initialize: function() {
             $(this.el).setTemplateURL("app/blocks/b-catalog.tpl");
+
             App.currentUser.bind('change:shippingAddress', this.render, this);
-
-
-
-
         },
 
         render: function() {
             $(this.el).processTemplate(App.currentUser.toJSON());
             App.control.renderBalance();
+            $('#modal-shipping').setTemplateURL("app/blocks/b-modal-shipping.tpl");
+            $('#modal-shipping').processTemplate(App.currentUser.toJSON());
             return this;
         },
 
@@ -440,7 +512,8 @@ $(document).ready(function() {
 //            "click " : "hideShipping"
 //            "click .b-profile__save .reset" : "hideEditForm"
         },
-        initShipping: function(evt){
+        initShipping: function(evt) {
+            $('#modal-shipping').processTemplate(App.currentUser.toJSON());
             var modalControl = $('#modal-shipping');
             var primary = $('#modal-shipping').find('.primary');
             var secondary = $('#modal-shipping').find('.secondary');
@@ -450,6 +523,18 @@ $(document).ready(function() {
             step1.show();
             step2.hide();
 
+            var showResult = function() {
+                if (App.wizardMode) {
+                    App.splash.render({finish: true})
+                    modalControl.modal('hide');
+                    App.router.navigate('splash', true)
+                    App.wizardNav.activeTab('splash_finish')
+                } else {
+                    step1.hide();
+                    step2.show();
+                }
+            }
+
             modalControl.find('.pic').html($(evt.target).parents('.partners-row').find('.partner-pic a').html())
             modalControl.modal({
                 keyboard: true,
@@ -457,29 +542,27 @@ $(document).ready(function() {
                 show: true
 
             })
-            secondary.click(function(evt){
+            secondary.click(function(evt) {
                 evt.preventDefault()
                 modalControl.modal('hide');
             })
-            primary.click(function(evt){
+            primary.click(function(evt) {
                 evt.preventDefault()
-                if(address.val() == ""){
+                if (address.val() == "") {
                     adress.focus()
                 } else {
                     App.currentUser.save({"shippingAddress": address.val()})
-                    step1.hide();
-                    step2.show();
+                    showResult()
                 }
 
             })
         }
-
-
-
     })
 
     App.catalog = new App.CatalogView()
     App.catalog.render()
+
+
 
 });
 
