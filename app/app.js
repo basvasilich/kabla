@@ -22,7 +22,9 @@ var App = (function() {
                             code: 0,
                             number: 0
                         },
-                        "shippingAddress": ""
+                        "identification-type": "voucher",
+                        "gift": ""
+
                     }
                 }
             });
@@ -41,6 +43,28 @@ var App = (function() {
                 }
             })
             return result;
+        },
+
+        doAction: function(action, params, onSuccess, onError) {
+            var result, data;
+            params.action = action
+            $.ajax({
+                url: 'api',
+                method: 'POST',
+                data: params,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                    if(result.status == 'ok') {
+                        if (onSuccess) onSuccess(result.data);
+                    } else {
+                        if (onError) onError();
+                    }
+                },
+                error: function(){
+                    if (onError) onError();
+                }
+            })
         }
 
     }
@@ -134,14 +158,22 @@ $(document).ready(function() {
 
 
         checkCoupon: function(coupon) {
+            var that = this
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
-                $(this.messages()).hide();
-                App.state.set({auth: true})
-                App.control.render();
+                App.doAction('identity', {'activation-code': coupon}, function(resultData){
+                    resultData.auth = true;
+                    App.user.set(resultData);
+                    $(that.messages()).hide();
+                    App.state.set({auth: true})
+                    App.control.render();
+                },
+                function(){
+                     that.showMessage('warning');
+                })
             }
             else {
-                this.showMessage('warning');
+                that.showMessage('warning');
             }
         }
 
@@ -175,7 +207,8 @@ $(document).ready(function() {
         },
 
         events: {
-            "click .b-profile__save .primary": "saveForm"
+            "click .b-profile__save .primary": "saveForm",
+            "click .b-profile__save .reset": "cancelForm"
         },
 
          show: function(){
@@ -188,7 +221,7 @@ $(document).ready(function() {
         saveForm: function(evt) {
             evt.preventDefault()
             var data = $(this.el).find('form').serializeArray();
-            console.log(data)
+
             var model = {
                 mobile: {}
             }
@@ -202,8 +235,15 @@ $(document).ready(function() {
                     model[this.name] = this.value;
                 }
             })
+            App.user.set(model)
 
-            App.router.navigate('finish', true)
+            App.doAction('order', App.user.toJSON(), function(resultData){
+                    App.router.navigate('finish', true)
+                })
+
+        },
+        cancelForm: function(){
+            App.router.navigate('catalog', true)
         }
     })
 
@@ -218,7 +258,8 @@ $(document).ready(function() {
         },
 
         render: function() {
-            $(this.el).processTemplate();
+            var data = App.getLocalData('catalog')
+            $(this.el).processTemplate(data);
             return this;
         },
 
@@ -234,6 +275,9 @@ $(document).ready(function() {
         },
 
         initShipping: function(evt) {
+            evt.preventDefault();
+            var params = evt.target.onclick()
+            App.user.set(params);
             App.router.navigate('profile', true)
         }
     })

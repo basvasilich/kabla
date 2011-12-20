@@ -1,10 +1,11 @@
-.b-login__i
+.b-login .b-login__i
 {
     border-radius: 6px 6px 6px 6px;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     margin: 5em auto 0 auto;
     padding-top: 2em;
+    width: 440px
 }
 
 .b-login__option-action
@@ -25,7 +26,7 @@
 
 .b-login__header img
 {
-    margin: 0 auto;
+    margin: 0;
     display: block;
 }
 
@@ -58,8 +59,9 @@
     text-align: center;
 }
 
-.b-login__error
+.b-login .b-login__error
 {
+    width: 440px;
     margin: 0 auto;
 }
 
