@@ -1,8 +1,6 @@
 {#template MAIN}
 <div class="b-catalog__i">
     <h2>Каталог подарков</h2>
-
-    <div class="modal hide fade" id="modal-shipping"></div>
 <div class="row">
 <div class="span10">
     <div class="b-catalog__promo">
