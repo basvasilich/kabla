@@ -3,7 +3,7 @@
     <div class="row">
 
         <div class="span8">
-            <h2>Личная информация</h2>
+            <h2>Доставка</h2>
 
             <fieldset>
                 <div class="b-profile__field clearfix">
@@ -37,7 +37,7 @@
         </div>
         <div class="span7">
             <fieldset>
-                <legend>Доставка</legend>
+                <!--<legend>Доставка</legend>-->
                 <div class="b-profile__field  clearfix">
                     <label for="shippingAddress">Адрес</label>
 

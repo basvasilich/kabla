@@ -61,16 +61,13 @@ $(document).ready(function() {
             $(this.el).processTemplate();
             return this;
         },
-        activeTab: function(params) {
-            params = params || {finish: false}
-            var tab = params.finish  ? 'splash_finish' : 'splash_start';
-            $(this.el).find('li').removeClass('active')
-            $(this.el).find('.' + tab).addClass('active');
-        }
+         activeTab: function(tab){
+                $(this.el).find('li').removeClass('active')
+                $(this.el).find('.'+ tab).addClass('active');
+            }
     })
 
     App.wizardNav = new App.WizardNav()
-    App.wizardNav.render()
 
     App.SplashView = Backbone.View.extend({
         el: $('.b-splash'),
@@ -237,7 +234,7 @@ $(document).ready(function() {
         },
 
         initShipping: function(evt) {
-
+            App.router.navigate('profile', true)
         }
     })
 
@@ -253,6 +250,7 @@ $(document).ready(function() {
 
         render: function() {
             $(".topbar-wrapper").processTemplate();
+            App.wizardNav.render()
             $(this.el).addClass('b-app_wizardMode')
             App.router.navigate('start', true)
         },
@@ -310,7 +308,7 @@ $(document).ready(function() {
 
                App.splash.render();
                App.splash.show();
-               App.wizardNav.activeTab();
+               App.wizardNav.activeTab('splash_start');
                           } else {
                    this.doExit();
                }
@@ -320,7 +318,7 @@ $(document).ready(function() {
                if (App.state.get('auth')){
                    App.splash.render({finish: true});
                    App.splash.show();
-                   App.wizardNav.activeTab({finish: true});
+                   App.wizardNav.activeTab('splash_finish');
               } else {
                    this.doExit();
                }
