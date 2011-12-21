@@ -1,6 +1,8 @@
 <?php
 
-$id_type = $_REQUEST["identity-type"];
+### ACTION: Identify ###
+
+$id_type = $_REQUEST["identification-type"];
 		
 # VOUCHER
 if ($id_type == "voucher")
@@ -9,6 +11,9 @@ if ($id_type == "voucher")
 	
 	if ($id_code == "777")
 	{
+		$identity_token = uniqid();
+		
+		$action_result["data"] = array("token" => $identity_token);
 		$action_result["status"] = "ok";
 	}
 	else

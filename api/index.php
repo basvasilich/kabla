@@ -5,6 +5,7 @@
 	
 	$action_result = array(
 		"action" => $action_name,
+		"timestamp" => "",
 		"status" => "unknown"
 	);
 	
@@ -34,5 +35,6 @@
 		}
 	}
 
+	$action_result["timestamp"] = gmdate("Y-m-d\TH:i:s\Z");
 	echo json_encode($action_result);
 ?>
