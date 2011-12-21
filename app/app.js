@@ -161,7 +161,7 @@ $(document).ready(function() {
             var that = this
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
-                App.doAction('identity', {'activation-code': coupon}, function(resultData){
+                App.doAction('identify', {'activation-code': coupon}, function(resultData){
                     resultData.auth = true;
                     App.user.set(resultData);
                     $(that.messages()).hide();
@@ -236,7 +236,7 @@ $(document).ready(function() {
                 }
             })
             App.user.set(model)
-
+            console.log(App.user.toJSON());
             App.doAction('order', App.user.toJSON(), function(resultData){
                     App.router.navigate('finish', true)
                 })
