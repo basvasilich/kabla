@@ -2,7 +2,6 @@ var App = (function() {
     return {
         init: function() {
 
-            localSettings = App.getLocalData('settings')
             App.Model = Backbone.Model.extend({
                 defaults: function() {
                     return {
@@ -161,7 +160,7 @@ $(document).ready(function() {
             var that = this
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
-                App.doAction('identify', {'activation-code': coupon}, function(resultData){
+                App.doAction('identify', {'activation-code': coupon, "identification-type": "voucher"}, function(resultData){
                     resultData.auth = true;
                     App.user.set(resultData);
                     $(that.messages()).hide();
