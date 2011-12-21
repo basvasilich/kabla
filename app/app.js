@@ -189,6 +189,13 @@ $(document).ready(function() {
 
         render: function() {
             $(this.el).processTemplate();
+              $(this.el).find('form').validate({
+                   showErrors: function(errorMap, errorList) {
+                       $(errorList).each(function(){
+                           $(this.element).parents('.clearfix').addClass('error')
+                       })
+                  }
+             })
             $(this.el).find('.input_onlyDigits').keydown(function(event) {
                 // Allow only backspace and delete
                 if (event.keyCode == 46 || event.keyCode == 8) {
@@ -207,7 +214,8 @@ $(document).ready(function() {
 
         events: {
             "click .b-profile__save .primary": "saveForm",
-            "click .b-profile__save .reset": "cancelForm"
+            "click .b-profile__save .reset": "cancelForm",
+            "keydown .b-profile input": "cleanErrors"
         },
 
          show: function(){
@@ -217,28 +225,37 @@ $(document).ready(function() {
             $('.b-layout_profile').show();
         },
 
+        cleanErrors: function(){
+            $(this.el).find('.clearfix').removeClass('error')
+        },
+
         saveForm: function(evt) {
             evt.preventDefault()
-            var data = $(this.el).find('form').serializeArray();
 
-            var model = {
-                mobile: {}
-            }
+//            $(this.el).find('form').submit();
+//            console.log()
+            if ($(this.el).find('form').validate().form()) {
+                var data = $(this.el).find('form').serializeArray();
 
-            $(data).each(function() {
-                if (this.name == 'code') {
-                    model['mobile']['code'] = this.value != '' ? parseInt(this.value) : 0;
-                } else if (this.name == 'number') {
-                    model['mobile']['number'] = this.value != '' ? parseInt(this.value) : 0;
-                } else {
-                    model[this.name] = this.value;
+                var model = {
+                    mobile: {}
                 }
-            })
-            App.user.set(model)
-            console.log(App.user.toJSON());
-            App.doAction('order', App.user.toJSON(), function(resultData){
+
+                $(data).each(function() {
+                    if (this.name == 'code') {
+                        model['mobile']['code'] = this.value != '' ? parseInt(this.value) : 0;
+                    } else if (this.name == 'number') {
+                        model['mobile']['number'] = this.value != '' ? parseInt(this.value) : 0;
+                    } else {
+                        model[this.name] = this.value;
+                    }
+                })
+                App.user.set(model)
+                console.log(App.user.toJSON());
+                App.doAction('order', App.user.toJSON(), function(resultData) {
                     App.router.navigate('finish', true)
                 })
+            }
 
         },
         cancelForm: function(){

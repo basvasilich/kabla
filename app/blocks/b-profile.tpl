@@ -10,27 +10,41 @@
                         <label for="name">Имя</label>
 
                         <div class="input">
-                            <input type="text" value="" size="30" name="name" id="name" class="large"/>
+                            <input type="text" value="" size="30" name="name" id="name" class="large required"/>
                         </div>
                     </div>
                     <div class="b-profile__field clearfix">
                         <label for="email">Email</label>
 
                         <div class="input">
-                            <input type="email" value="" size="30" name="email" id="email"
-                                   class="large"/>
+                            <input type="text" value="" size="30" name="email" id="email"
+                                   class="large email"/>
                         </div>
                     </div>
                       <div class="b-profile__field clearfix">
-                        <label for="code">Телефон</label>
+                        <label for="mobileCode">Телефон</label>
                         <div class="input">
                             +7 ( <input type="text" value="" maxlength="3"
-                                        name="code" id="code" class="span1 input_onlyDigits"/> )
+                                        name="mobileCode" id="mobileCode" class="required span1 input_onlyDigits"/> )
                             <input type="text" value="" maxlength="7"
-                                   name="number" id="number" class="span2 input_onlyDigits"/>
+                                   name="mobileNumber" id="mobileNumber" class="required span2 input_onlyDigits"/>
                         </div>
                     </div>
+                    <div class="clearfix">
+            <div class="input">
+              <ul class="inputs-list">
+                <li>
+                  <label>
+                    <input id="personalCheck" type="checkbox" value="true" class="required" name="personalCheck" />
+                    <span>Я согласен на обработку персональных данных и <a href="#">ссылка на Условия</a></span>
+                  </label>
+                </li>
+
+              </ul>
+            </div>
+          </div>
                 </fieldset>
+
 
             </div>
         </div>
