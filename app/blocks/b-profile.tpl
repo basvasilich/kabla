@@ -52,27 +52,19 @@
             <div class="rcol">
                 <fieldset>
                    <div class="b-profile__field clearfix">
-                        <label for="addressCity">Город</label>
+                        <label for="city">Город</label>
                         <div class="input">
-                            <input type="text" value="" size="30" name="addressCity" id="addressCity"
+                            <input type="text" value="" size="30" name="city" id="city"
                                    class="large"/>
                         </div>
                     </div>
                      <div class="b-profile__field clearfix">
-                        <label for="addressStreet">Улица</label>
+                        <label for="address">Адрес</label>
                         <div class="input">
-                            <input type="text" value="" size="30" name="addressStreet" id="addressStreet"
+                            <input type="text" value="" size="30" name="address" id="address"
                                    class="large"/>
                         </div>
                     </div>
-                    <div class="b-profile__field clearfix">
-                        <label for="addressNumber">Дом</label>
-                        <div class="input">
-                            <input type="text" maxlength="7" value="" size="30" name="addressNumber" id="addressNumber"
-                                   class="span2"/>
-                        </div>
-                    </div>
-
                 </fieldset>
             </div>
         </div>
