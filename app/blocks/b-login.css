@@ -41,17 +41,9 @@
     padding: 0 20px 0 0;
 }
 
-.b-login__sidebar
-{
-    margin-top: 20px;
-    border-left: 1px solid #f1f1f1;
-    margin-left: -20px;
-    padding-left: 20px;
-}
-
 .b-login__note__i
 {
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 0;
 }
 
 .b-login__note__i p
@@ -63,7 +55,6 @@
 {
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: 0;
     text-align: center;
 }
 

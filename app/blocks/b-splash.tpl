@@ -23,7 +23,7 @@
         </div>
 
         <div class="promo-button">
-            <a class="btn large primary" href="#profile">Заполнить профиль</a>
+            <a class="btn large primary" href="#catalog">Заполнить профиль</a>
         </div>
     </div>
     {#/if}
