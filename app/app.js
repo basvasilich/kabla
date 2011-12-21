@@ -49,7 +49,7 @@ var App = (function() {
             var result, data;
             params.action = action
             $.ajax({
-                url: 'api',
+                url: 'api/',
                 method: 'POST',
                 data: params,
                 dataType: 'json',
