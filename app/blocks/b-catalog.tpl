@@ -31,7 +31,7 @@
         </div>
         <div class="partner-form">
             <div class="card-form">
-                <a onclick="return {#ldelim}'gift': {$T.id}{#rdelim}" class="btn large">Выбрать</a>
+                <a onclick="return {#ldelim}'gift': {$T.id}{#if $T.digital},'digital': {$T.digital}{#/if}{#rdelim}" class="btn large">Выбрать</a>
             </div>
         </div>
     </div>

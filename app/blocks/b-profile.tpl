@@ -7,22 +7,22 @@
                 <h2>Доставка</h2>
                 <fieldset>
                     <div class="b-profile__field clearfix">
-                        <label for="name">Имя</label>
+                        <label for="name"><b>Имя</b></label>
 
                         <div class="input">
                             <input type="text" value="" size="30" name="name" id="name" class="large required"/>
                         </div>
                     </div>
                     <div class="b-profile__field clearfix">
-                        <label for="email">Email</label>
+                        <label for="email">{#if $T.digitalGift}<b>Email</b>{#else}Email{#/if}</label>
 
                         <div class="input">
                             <input type="text" value="" size="30" name="email" id="email"
-                                   class="large email"/>
+                                   class="large email {#if $T.digitalGift}required{#/if}"/>
                         </div>
                     </div>
                       <div class="b-profile__field clearfix">
-                        <label for="mobileCode">Телефон</label>
+                        <label for="mobileCode"><b>Телефон</b></label>
                         <div class="input">
                             +7 ( <input type="text" value="" maxlength="3"
                                         name="mobileCode" id="mobileCode" class="required span1 input_onlyDigits"/> )
@@ -48,7 +48,8 @@
 
             </div>
         </div>
-        <div class="span8">
+        {#if !$T.digitalGift}
+            <div class="span8">
             <div class="rcol">
                 <fieldset>
                    <div class="b-profile__field clearfix">
@@ -68,6 +69,7 @@
                 </fieldset>
             </div>
         </div>
+        {#/if}
         <div class="b-profile__actions">
             <div class="b-profile__actions__i">
                 <div class="actions b-profile__save">

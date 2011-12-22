@@ -161,7 +161,6 @@ $(document).ready(function() {
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
                 App.doAction('identify', {'activation-code': coupon, "identification-type": "voucher"}, function(resultData){
-                    resultData.auth = true;
                     App.user.set(resultData);
                     $(that.messages()).hide();
                     App.state.set({auth: true})
@@ -188,7 +187,7 @@ $(document).ready(function() {
         },
 
         render: function() {
-            $(this.el).processTemplate();
+            $(this.el).processTemplate(App.state.toJSON());
               $(this.el).find('form').validate({
                    showErrors: function(errorMap, errorList) {
                        $(errorList).each(function(){
@@ -293,7 +292,8 @@ $(document).ready(function() {
         initShipping: function(evt) {
             evt.preventDefault();
             var params = evt.target.onclick()
-            App.user.set(params);
+            App.user.set(params.id);
+            if(params.digital) App.state.set({'digitalGift': true})
             App.router.navigate('profile', true)
         }
     })
