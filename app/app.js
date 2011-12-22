@@ -12,21 +12,7 @@ var App = (function() {
 
             App.state = new App.Model({ id: 1 });
 
-            App.UserModel = Backbone.Model.extend({
-                defaults: function() {
-                    return {
-                        "name": "Гость",
-                        "email": "",
-                        "mobile": {
-                            code: 0,
-                            number: 0
-                        },
-                        "identification-type": "voucher",
-                        "gift": ""
-
-                    }
-                }
-            });
+            App.UserModel = Backbone.Model.extend();
 
             App.user = new App.UserModel()
         },
@@ -234,20 +220,11 @@ $(document).ready(function() {
 //            $(this.el).find('form').submit();
 //            console.log()
             if ($(this.el).find('form').validate().form()) {
-                var data = $(this.el).find('form').serializeArray();
-
-                var model = {
-                    mobile: {}
-                }
+                var data = $(this.el).find('form').serializeArray(),
+                model = {};
 
                 $(data).each(function() {
-                    if (this.name == 'code') {
-                        model['mobile']['code'] = this.value != '' ? parseInt(this.value) : 0;
-                    } else if (this.name == 'number') {
-                        model['mobile']['number'] = this.value != '' ? parseInt(this.value) : 0;
-                    } else {
-                        model[this.name] = this.value;
-                    }
+                        if(this.name != 'personalCheck') model[this.name] = this.value;
                 })
                 App.user.set(model)
                 console.log(App.user.toJSON());
@@ -292,7 +269,7 @@ $(document).ready(function() {
         initShipping: function(evt) {
             evt.preventDefault();
             var params = evt.target.onclick()
-            App.user.set(params.id);
+            App.user.set({'gift': params.gift});
             if(params.digital) App.state.set({'digitalGift': true})
             App.router.navigate('profile', true)
         }
