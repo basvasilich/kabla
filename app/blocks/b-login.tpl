@@ -14,8 +14,8 @@
 
                             <div class="clearfix">
                                 <div class="input">
-                                    <input class="b-login__couponField span7" placeholder="1000"
-                                           id="loginCoupon" maxlength="6" name="loginCoupon" type="text"/>
+                                    <input class="b-login__couponField span7"
+                                           id="loginCoupon" maxlength="8" name="loginCoupon" type="text"/>
                                 </div>
                             </div>
                         </fieldset>
@@ -41,4 +41,4 @@
         </div>
     </div>
 </div>
-        {#/template MAIN}
+{#/template MAIN}

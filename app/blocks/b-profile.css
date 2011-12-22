@@ -110,3 +110,8 @@
     padding-left: 170px;
     margin-bottom: 0;
 }
+
+.b-profile .clearfix.error .inputs-list label
+{
+    color: #B94A48;
+}

@@ -2,7 +2,7 @@
 <div data-dropdown="dropdown" class="b-topbar topbar">
     <div class="topbar-inner">
         <div class="container">
-            <h3><a>Бумкарта</a></h3>
+            <h3><a>Карт-бланш</a></h3>
             <ul class="b-topbar__nav nav">
                 <li class="catalog"><a href="#catalog">Каталог</a></li>
                 <!--<li class="special"><a href="#special">Специальные предложения</a></li>-->
