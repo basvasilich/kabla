@@ -32,6 +32,11 @@
     border-top: 1px solid #F1F2F0;
     padding: 20px 0;
     position: relative;
+    cursor: pointer;
+}
+
+.partners-row.hover {
+    background: rgba(0, 115, 188, 0.02)
 }
 
 #partners-list .partners-row .popup-window {
@@ -63,6 +68,7 @@
 
 .partner-pic img {
     margin-top: 5px;
+
 }
 
 .partner-text {
@@ -94,6 +100,7 @@
 .partner-form .card-form {
     margin-top: 5px;
     text-align: right;
+    padding-right: 20px;
 }
 
 @font-face {
@@ -107,5 +114,12 @@
     font-family: 'ALSRublRegular';
     font-style: normal;
 }
+
+.b-catalog .kind
+{
+    width: 120px;
+    margin:  10px auto 0 auto;
+}
+
 
 

@@ -34,7 +34,7 @@ var App = (function() {
             var result, data;
             params.action = action
             $.ajax({
-                url: 'api/',
+                url: 'api/index.json',
                 type: 'POST',
                 data: params,
                 dataType: 'json',
@@ -219,8 +219,6 @@ $(document).ready(function() {
         saveForm: function(evt) {
             evt.preventDefault()
 
-//            $(this.el).find('form').submit();
-//            console.log()
             if ($(this.el).find('form').validate().form()) {
                 var data = $(this.el).find('form').serializeArray(),
                 model = {};
@@ -255,13 +253,19 @@ $(document).ready(function() {
         },
 
         render: function() {
+            App.state.unset('digitalGift')
             var data = App.getLocalData('catalog')
             $(this.el).processTemplate(data);
+            $(this.el).find('.partners-row').hover(function(){
+                $(this).addClass('hover');
+            },function(){
+                $(this).removeClass('hover');
+            })
             return this;
         },
 
         events: {
-            "click .partners-row .partner-form .btn": "initShipping"
+            "click .partners-row": "initShipping"
         },
 
         show: function(){
@@ -273,7 +277,8 @@ $(document).ready(function() {
 
         initShipping: function(evt) {
             evt.preventDefault();
-            var params = evt.target.onclick()
+            var row = $(evt.target).parents('.partners-row');
+            params = row[0].onclick();
             App.user.set({'gift': params.gift});
             if(params.digital) App.state.set({'digitalGift': true})
             App.router.navigate('profile', true)
