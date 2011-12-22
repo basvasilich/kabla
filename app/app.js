@@ -89,7 +89,6 @@ $(document).ready(function() {
                 params = params || {finish: false}
                 var data = App.state.toJSON()
                 data.params = params
-                console.log(data)
                 $(this.el).processTemplate(data);
                 return this;
             },
@@ -231,7 +230,6 @@ $(document).ready(function() {
                 })
                 App.user.set(model)
                 App.doAction('order', App.user.toJSON(), function(resultData) {
-                    console.log(resultData["order-number"])
                     App.state.set({"orderNumber": resultData["order-number"]})
                     App.router.navigate('finish', true);
 
