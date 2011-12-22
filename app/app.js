@@ -87,7 +87,9 @@ $(document).ready(function() {
 
             render: function(params) {
                 params = params || {finish: false}
-                $(this.el).processTemplate(params);
+                var data = App.state.toJSON()
+                data.params = params
+                $(this.el).processTemplate(data);
                 return this;
             },
 
@@ -227,9 +229,9 @@ $(document).ready(function() {
                         if(this.name != 'personalCheck') model[this.name] = this.value;
                 })
                 App.user.set(model)
-                console.log(App.user.toJSON());
                 App.doAction('order', App.user.toJSON(), function(resultData) {
                     App.router.navigate('finish', true)
+                    App.state.set({'orderNumber': resultData["order-number"]})
                 })
             }
 
