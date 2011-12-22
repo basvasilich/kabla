@@ -1,5 +1,5 @@
 {#template MAIN}
-<div data-dropdown="dropdown" class="b-topbar topbar">
+<div class="b-topbar topbar">
     <div class="topbar-inner">
         <div class="container">
             <h3><a>Система корпоративных подарков «Карт Бланш»</a></h3>

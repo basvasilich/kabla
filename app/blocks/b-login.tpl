@@ -29,12 +29,10 @@
     <div class="b-login__error span8">
         <div class="alert-message error">
             <a href="#" class="close">×</a>
-
             <p><strong>Неправильный логин или пароль</strong> попробуйте еще раз.</p>
         </div>
         <div class="alert-message warning">
             <a href="#" class="close">×</a>
-
             <p><strong>У нас нет такого купона.</strong> Видимо вы ошиблись, проверьте правильно ли вы ввели его
                 номер.
             </p>
