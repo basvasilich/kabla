@@ -43,7 +43,7 @@ var App = (function() {
                     if(result.status == 'ok') {
                         if (onSuccess) onSuccess(result.data);
                     } else {
-                        if (onError) onError();
+                        if (onError) onError((result));
                     }
                 },
                 error: function(){
@@ -154,8 +154,12 @@ $(document).ready(function() {
                     App.state.set({auth: true})
                     App.control.render();
                 },
-                function(){
-                     that.showMessage('warning');
+                function(result){
+                    if(result['error-type'] == 'bad-activation-code'){
+                        that.showMessage('bad-code');
+                    } else{
+                        that.showMessage('code-expired');
+                    }
                 })
             }
             else {
