@@ -4,7 +4,7 @@
 
         <div class="span8">
             <div class="lcol">
-                <h2>Доставка</h2>
+                <h2>{#if $T.digitalGift}Доставка по электронной почте{#else}Доставка с курьером{#/if}</h2>
                 <fieldset>
                     <div class="b-profile__field clearfix">
                         <label for="name"><b>Имя</b></label>
