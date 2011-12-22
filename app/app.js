@@ -238,7 +238,9 @@ $(document).ready(function() {
 
         },
         cancelForm: function(){
+            App.state.unset('digitalGift')
             App.router.navigate('catalog', true)
+
         }
     })
 
