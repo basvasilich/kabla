@@ -4,6 +4,7 @@
 # Copyright ©, 2011 Smekalka
 
 $id_type = $_REQUEST["identification-type"];
+$current_access_point = $_SERVER["REMOTE_ADDR"];
 		
 # VOUCHER IDENTIFICATION
 if ($id_type == "voucher")
@@ -39,7 +40,7 @@ if ($id_type == "voucher")
 		#	// …
 		#}
 		
-		$query_result = mysql_query(sprintf("SELECT * FROM ACCESS_GEAR_IDENTITY_TOKEN WHERE ACCESS_GEAR_ID = %s", mysql_real_escape_string($voucher_id)));
+		$query_result = mysql_query(sprintf("SELECT * FROM ACCESS_GEAR_IDENTITY_TOKEN WHERE ACCESS_GEAR_ID = %s AND ACCESS_POINT = '%s'", $voucher_id,  mysql_real_escape_string($current_access_point)));
 		if (!$query_result) {
 			$action_result["status"] = "failed";
 			$action_result["error-type"] = "server-error";
@@ -53,12 +54,20 @@ if ($id_type == "voucher")
 		if ($row)
 		{
 			$identity_token = $row["IDENTITY_TOKEN"];
+			$token_access_point = $row["ACCESS_POINT"];
+			
+			if ($current_access_point != $token_access_point)
+			{
+				$identity_token = null;
+			}
+			
 			// TODO: Check expiration, etc...
 		}
-		else
+		
+		if (!$identity_token)
 		{
 			$identity_token = uniqid();
-			mysql_query(sprintf("INSERT ACCESS_GEAR_IDENTITY_TOKEN(IDENTITY_TOKEN, ACCESS_GEAR_ID) VALUE('%s', %s)", $identity_token, $voucher_id));
+			mysql_query(sprintf("INSERT ACCESS_GEAR_IDENTITY_TOKEN(IDENTITY_TOKEN, ACCESS_POINT, ACCESS_GEAR_ID) VALUE('%s', '%s', %s)", $identity_token, mysql_real_escape_string($current_access_point), $voucher_id));
 		}
 		
 		$action_result["data"] = array("token" => $identity_token);
