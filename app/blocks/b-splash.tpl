@@ -2,7 +2,7 @@
 <div id="promo-giftcards" class="promo" style="display: block;">
     {#if $T.params.finish}
     <div class="finish">
-        <h2>Ваш заказ сделан. Запишите его номер — {$T.orderNumber}.</h2>
+        <h2>Ваш заказ №{$T.orderNumber} сделан.</h2>
 
         <div class="pic"><img src="app/img/super.png" alt=""/></div>
         <div class="promo-text">

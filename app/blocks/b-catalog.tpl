@@ -24,7 +24,7 @@
 {#template item}
     <div class="partners-row popup-dock ">
         <div class="partner-pic">
-            <a href="#"><img src="{$T.img}" alt="{$T.title}"/></a>
+            <img src="{$T.img}" alt="{$T.title}"/>
         </div>
         <div class="partner-text">
             <p class="">{$T.text}</p>
