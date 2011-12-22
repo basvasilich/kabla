@@ -35,7 +35,7 @@ var App = (function() {
             params.action = action
             $.ajax({
                 url: 'api/',
-                method: 'POST',
+                type: 'POST',
                 data: params,
                 dataType: 'json',
                 async: false,
