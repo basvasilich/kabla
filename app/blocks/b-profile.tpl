@@ -71,8 +71,7 @@
                             <label>
                                 <input id="personalCheck" type="checkbox" value="true" class="required"
                                        name="personalCheck"/>
-                                <span>Я согласен на обработку персональных данных и <a href="#">ссылка на
-                                    Условия</a></span>
+                                <span>Я согласен на обработку персональных данных</span>
                             </label>
                         </li>
 
