@@ -8,12 +8,11 @@
     background: url("../img/headerBg.png") repeat-x scroll 0 0 #0073BC;
 }
 
-/*
 .b-topbar .container h3 a
 {
     padding-top: 4px;
     padding-bottom: 4px;
-}*/
+}
 
 .b-topbar .secondary-nav .dropdown ul.dropdown-menu
 {
