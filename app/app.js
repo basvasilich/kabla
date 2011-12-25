@@ -345,6 +345,7 @@ $(document).ready(function() {
             $('.b-state_app').hide();
             $('.b-state_login').show();
             $('.b-layout').hide();
+            App.user.clean();
         },
 
         messageClose: function(evt) {
@@ -401,7 +402,9 @@ $(document).ready(function() {
                if (App.state.get('auth')){
                    App.splash.render({finish: true});
                    App.splash.show();
+                   App.user.clean();
                    App.wizardNav.activeTab('splash_finish');
+
               } else {
                    this.doExit();
                }
