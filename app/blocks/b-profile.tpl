@@ -7,18 +7,19 @@
             <div class="lcol">
               <fieldset>
                     <div class="b-profile__field clearfix">
-                        <label for="name"><b>Имя</b></label>
+                        <label for="name"><b>ФИО</b></label>
 
                         <div class="input">
                             <input type="text" value="" size="30" name="name" id="name" class="large required"/>
+                            <span class="help-block">Полные данные</span>
                         </div>
                     </div>
                     <div class="b-profile__field clearfix">
-                        <label for="email">{#if $T.digitalGift}<b>Email</b>{#else}Email{#/if}</label>
+                        <label for="email"><b>Email</b></label>
 
                         <div class="input">
                             <input type="text" value="" size="30" name="email" id="email"
-                                   class="large email {#if $T.digitalGift}required{#/if}"/>
+                                   class="large required email {#if $T.digitalGift}required{#/if}"/>
                         </div>
                     </div>
                       <div class="b-profile__field clearfix">
@@ -35,28 +36,31 @@
 
             </div>
         </div>
-        {#if !$T.digitalGift}
+
             <div class="span7 right">
             <div class="rcol">
                 <fieldset>
-                   <div class="b-profile__field clearfix">
-                        <label for="city">Город</label>
-                        <div class="input">
-                            <input type="text" value="" size="30" name="city" id="city"
-                                   class="large"/>
-                        </div>
-                    </div>
-                     <div class="b-profile__field clearfix">
-                        <label for="address">Адрес</label>
-                        <div class="input">
-                            <input type="text" value="" size="30" name="address" id="address"
-                                   class="large"/>
-                        </div>
-                    </div>
+
+                    {#if !$T.digitalGift}
+                    <div class="b-profile__field  clearfix">
+                                <label for="address"><b>Адрес для доставки</b></label>
+                                <div class="input">
+                                  <textarea rows="3" name="address" id="address" class="required large"></textarea>
+                                  <span class="help-block">Индекс, город, улица, дом, квартира</span>
+                                </div>
+                              </div>
+                    {#/if}
+                    <div class="b-profile__field  clearfix">
+                       <label for="comment">Примечание</label>
+                       <div class="input">
+                         <textarea rows="3" name="comment" id="comment" class="large"></textarea>
+                       </div>
+                     </div>
                 </fieldset>
+
             </div>
         </div>
-        {#/if}
+
     </div>
     <div class="row">
         <fieldset class="check">
