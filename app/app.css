@@ -5,6 +5,7 @@
 @import url(blocks/b-topbar.css);
 @import url(blocks/b-profile.css);
 @import url(blocks/b-catalog.css);
+@import url(blocks/b-catalog_short.css);
 @import url(blocks/b-wizard-nav.css);
 @import url(blocks/b-splash.css);
 @import url(../libs/bootstrap.css);
@@ -16,6 +17,6 @@ body, html {
     /*height: 100%;*/
     min-width: 1000px;
     width: 100%;
-    background:  #F1F2F0;
+    background:  #cecece;
 }
 

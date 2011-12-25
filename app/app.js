@@ -18,7 +18,6 @@ var App = (function() {
         },
 
         getLocalData: function(what) {
-            var result;
             $.ajax({
                 url: 'data/' + what + '.json',
                 dataType: 'json',
@@ -31,7 +30,7 @@ var App = (function() {
         },
 
         doAction: function(action, params, onSuccess, onError) {
-            var result, data;
+            var data;
             params.action = action
             $.ajax({
                 url: 'api/',
@@ -179,8 +178,11 @@ $(document).ready(function() {
         },
 
         render: function() {
+
+
             $(this.el).processTemplate(App.state.toJSON());
-              $(this.el).find('form').validate({
+
+            $(this.el).find('form').validate({
                    showErrors: function(errorMap, errorList) {
                        $(errorList).each(function(){
                            $(this.element).parents('.clearfix').addClass('error')
@@ -258,8 +260,9 @@ $(document).ready(function() {
 
         render: function() {
             App.state.unset('digitalGift')
-            var data = App.getLocalData('catalog')
-            $(this.el).processTemplate(data);
+            var catalog = App.getLocalData('catalog');
+            App.state.set({'catalog': catalog})
+            $(this.el).processTemplate(catalog);
             $(this.el).find('.partners-row').hover(function(){
                 $(this).addClass('hover');
             },function(){
@@ -287,9 +290,30 @@ $(document).ready(function() {
             if(params.digital) App.state.set({'digitalGift': true})
             App.router.navigate('profile', true)
         }
-    })
+    });
 
     App.catalog = new App.CatalogView()
+
+
+    App.CatalogShortView = Backbone.View.extend({
+            render: function() {
+                console.log('fire')
+                var data = App.state.get('catalog')
+                var position
+
+                $('.b-catalog_short').setTemplateURL("app/blocks/b-catalog_short.tpl");
+
+                $(data).each(function(){
+                    if(this['id'] == App.user.get('gift')) position = this
+                })
+                $('.b-catalog_short').processTemplate(position);
+            }
+        })
+
+
+    App.catalogShort = new App.CatalogShortView()
+
+
 
 
     App.AppView = Backbone.View.extend({
@@ -347,6 +371,7 @@ $(document).ready(function() {
            showProfile: function() {
                if (App.state.get('auth')){
                App.profile.render();
+               App.catalogShort.render();
                App.profile.show();
                App.wizardNav.activeTab('profile')
                    } else {

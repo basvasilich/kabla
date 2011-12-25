@@ -12,7 +12,7 @@
 
 .b-profile .rcol
 {
-    padding-top: 26px;
+    margin-top: -20px;
 }
 
 .b-profile form
@@ -107,11 +107,27 @@
 
 .b-profile__actions .actions
 {
-    padding-left: 170px;
+    padding-left: 214px;
     margin-bottom: 0;
 }
 
 .b-profile .clearfix.error .inputs-list label
 {
     color: #B94A48;
+}
+
+
+.b-profile .left
+{
+    padding-left: 44px;
+}
+
+.b-profile .header
+{
+    padding: 20px 0 20px 20px;
+}
+
+.b-profile .check .input
+{
+    margin-left: 234px;
 }

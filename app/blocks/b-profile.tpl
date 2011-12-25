@@ -1,11 +1,11 @@
 {#template MAIN}
-<form>
+<div class="b-catalog_short"></div>
+<h2 class="header">{#if $T.digitalGift}Доставка по электронной почте{#else}Доставка с курьером{#/if}</h2>
+<form >
     <div class="row">
-
-        <div class="span8">
+        <div class="span7 left">
             <div class="lcol">
-                <h2>{#if $T.digitalGift}Доставка по электронной почте{#else}Доставка с курьером{#/if}</h2>
-                <fieldset>
+              <fieldset>
                     <div class="b-profile__field clearfix">
                         <label for="name"><b>Имя</b></label>
 
@@ -30,26 +30,13 @@
                                    name="mobileNumber" id="mobileNumber" class="required span2 input_onlyDigits"/>
                         </div>
                     </div>
-                    <div class="clearfix">
-            <div class="input">
-              <ul class="inputs-list">
-                <li>
-                  <label>
-                    <input id="personalCheck" type="checkbox" value="true" class="required" name="personalCheck" />
-                    <span>Я согласен на обработку персональных данных и <a href="#">ссылка на Условия</a></span>
-                  </label>
-                </li>
-
-              </ul>
-            </div>
-          </div>
                 </fieldset>
 
 
             </div>
         </div>
         {#if !$T.digitalGift}
-            <div class="span8">
+            <div class="span7 right">
             <div class="rcol">
                 <fieldset>
                    <div class="b-profile__field clearfix">
@@ -70,6 +57,27 @@
             </div>
         </div>
         {#/if}
+    </div>
+    <div class="row">
+        <fieldset class="check">
+            <div class="clearfix">
+                <div class="input">
+                    <ul class="inputs-list">
+                        <li>
+                            <label>
+                                <input id="personalCheck" type="checkbox" value="true" class="required"
+                                       name="personalCheck"/>
+                                <span>Я согласен на обработку персональных данных и <a href="#">ссылка на
+                                    Условия</a></span>
+                            </label>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
         <div class="b-profile__actions">
             <div class="b-profile__actions__i">
                 <div class="actions b-profile__save">
@@ -78,8 +86,8 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
 </form>
         {#/template MAIN}
