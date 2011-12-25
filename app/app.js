@@ -288,7 +288,12 @@ $(document).ready(function() {
         initShipping: function(evt) {
             evt.preventDefault();
             var row = $(evt.target).parents('.partners-row');
-            params = row[0].onclick();
+            var data =  $(evt.target).parents('.partners-row').find('.params').serializeArray()
+            var params = {}
+            $(data).each(function(){
+                params[this.name] = this.value;
+            })
+
             App.user.set({'gift': params.gift});
             if(params.digital) App.state.set({'digitalGift': true})
             App.router.navigate('profile', true)
@@ -300,7 +305,6 @@ $(document).ready(function() {
 
     App.CatalogShortView = Backbone.View.extend({
             render: function() {
-                console.log('fire')
                 var data = App.state.get('catalog')
                 var position
 

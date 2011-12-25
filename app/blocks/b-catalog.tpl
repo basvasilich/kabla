@@ -24,7 +24,8 @@
 {#/template list}
 
 {#template item}
-    <div  onclick="return {#ldelim}'gift': {$T.id}{#if $T.digital},'digital': {$T.digital}{#/if}{#rdelim}"  class="partners-row popup-dock ">
+    <div class="partners-row popup-dock ">
+
         <div class="partner-pic">
             <img src="{$T.img}" alt="{$T.title}"/>
             {#if $T.digital}<div class="kind kind_digital"><span class="label success">Электронный</span></div>{#else}<div class="kind kind_analog"><span class="label notice">Пластиковый</span></div>{#/if}
@@ -37,6 +38,10 @@
                 <a class="btn large">Выбрать</a>
             </div>
         </div>
+        <form class="params">
+            <input type="hidden" name="gift" value="{$T.id}" />
+            {#if $T.digital}<input type="hidden" name="digital" value="{$T.digital}" />{#/if}
+        </form>
     </div>
 {#/template item}
 

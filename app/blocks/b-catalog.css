@@ -127,6 +127,11 @@
     margin:  10px auto 0 auto;
 }
 
+.b-catalog .params
+{
+    display: none;
+}
+
 
 
 
