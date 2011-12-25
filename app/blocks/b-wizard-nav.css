@@ -1,11 +1,19 @@
+.b-wizard-nav
+{
+    width: 100%;
+    overflow: hidden;
+    background: url("../img/logo_jj.png") no-repeat 98% 15px;
+}
+
 .b-wizard-nav li
 {
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .b-wizard-nav .breadcrumb
 {
-    margin: 20px;
+    float: left;
+    margin: 20px 20px 10px 20px;
 }
 
 .b-wizard-nav .breadcrumb b,
