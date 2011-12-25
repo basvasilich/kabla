@@ -10,7 +10,6 @@
                         <fieldset>
                             <legend>Добро пожаловать в систему Карт Бланш Бумкарты.</legend>
                             <p><em>Введите номер вашего сертификата для дальнейшего выбора подарка.</em></p>
-
                             <div class="clearfix">
                                 <div class="input">
                                     <input class="b-login__couponField span7"

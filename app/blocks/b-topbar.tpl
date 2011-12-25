@@ -3,11 +3,6 @@
     <div class="topbar-inner">
         <div class="container">
             <h3><a>Карт Бланш Бумкарты – новые подарочные решения</a></h3>
-            <ul class="b-topbar__nav nav">
-                <li class="catalog"><a href="#catalog">Каталог</a></li>
-                <!--<li class="special"><a href="#special">Специальные предложения</a></li>-->
-                <!--<li class="shiping"><a href="#shiping">Доставка</a></li>-->
-            </ul>
             <ul class="nav secondary-nav">
                 <li><a href="#exit">Выйти</a></li>
             </ul>
