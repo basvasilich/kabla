@@ -8,8 +8,8 @@
                 <div class="b-login__note span7">
                     <div class="b-login__note__i">
                         <fieldset>
-                            <legend>Добро пожаловать в систему Карт Бланш Бумкарты.</legend>
-                            <p><em>Введите номер вашего сертификата для дальнейшего выбора подарка.</em></p>
+                            <legend>Добро пожаловать<br/>в систему Карт Бланш Бумкарты</legend>
+                            <p>Введите номер вашего сертификата для дальнейшего выбора подарка</p>
                             <div class="clearfix">
                                 <div class="input">
                                     <input class="b-login__couponField span7"
@@ -19,6 +19,9 @@
                         </fieldset>
                     </div>
                 </div>
+                <div class="b-login__header">
+                                <img src="app/img/logo_jj.png" alt=""/>
+                            </div>
                 <div class="actions b-login__actions">
                     <button type="submit" class="btn large primary">Войти</button>
                 </div>

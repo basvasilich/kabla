@@ -49,6 +49,20 @@ var App = (function() {
                     if (onError) onError();
                 }
             })
+        },
+        allowOnlyDigits: function(item){
+            $(item).keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                        event.preventDefault();
+                    }
+                }
+            });
         }
 
     }
@@ -111,6 +125,7 @@ $(document).ready(function() {
         initialize: function() {
             $(".b-login").setTemplateURL("app/blocks/b-login.tpl");
             $(".b-login").processTemplate();
+            App.allowOnlyDigits($(".b-login").find('input'));
         },
 
         couponVal: function() {
@@ -162,7 +177,7 @@ $(document).ready(function() {
                 })
             }
             else {
-                that.showMessage('warning');
+                that.showMessage('bad-code');
             }
         }
 
@@ -189,18 +204,7 @@ $(document).ready(function() {
                        })
                   }
              })
-            $(this.el).find('.input_onlyDigits').keydown(function(event) {
-                // Allow only backspace and delete
-                if (event.keyCode == 46 || event.keyCode == 8) {
-                    // let it happen, don't do anything
-                }
-                else {
-                    // Ensure that it is a number and stop the keypress
-                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-                        event.preventDefault();
-                    }
-                }
-            });
+            App.allowOnlyDigits($(this.el).find('.input_onlyDigits'));
 
             return this;
         },
