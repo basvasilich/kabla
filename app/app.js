@@ -240,7 +240,7 @@ $(document).ready(function() {
                 App.doAction('order', App.user.toJSON(), function(resultData) {
                     App.state.set({"orderNumber": resultData["order-number"]})
                     App.router.navigate('finish', true);
-
+                    App.state.set({auth: false})
                 })
             }
 
@@ -248,7 +248,6 @@ $(document).ready(function() {
         cancelForm: function(){
             App.state.unset('digitalGift')
             App.router.navigate('catalog', true)
-
         }
     })
 
