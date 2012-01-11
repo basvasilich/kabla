@@ -3,12 +3,14 @@
     <div class="b-login__i span8">
         <form action="" class="form-stacked b-login__form">
                 <div class="b-login__header">
-                    <img src="app/img/logo_boomcard.png" alt=""/>
+                    <img src="app/img/logo_boomcard.png" alt="Бумкарта"/>
                 </div>
+                <hr width="400px"/>
                 <div class="b-login__note span7">
                     <div class="b-login__note__i">
                         <fieldset>
-                            <legend>Добро пожаловать<br/>в систему Карт Бланш Бумкарты</legend>
+                            <legend style="font-size:14pt">Добро пожаловать в систему &laquo;Карт Бланш&raquo;!</legend>
+                            <p style="padding-left:80px"><img src="app/img/logo_jj.png" alt="Johnson & Johnson LLC"/></p>
                             <p>Введите номер вашего сертификата для дальнейшего выбора подарка</p>
                             <div class="clearfix">
                                 <div class="input">
@@ -19,9 +21,7 @@
                         </fieldset>
                     </div>
                 </div>
-                <div class="b-login__header">
-                                <img src="app/img/logo_jj.png" alt=""/>
-                            </div>
+                <!--<div class="b-login__header"><img src="app/img/logo_jj.png" alt=""/></div>-->
                 <div class="actions b-login__actions">
                     <button type="submit" class="btn large primary">Войти</button>
                 </div>

@@ -1,6 +1,6 @@
 {#template MAIN}
 <div class="b-catalog_short"></div>
-<h2 class="header">{#if $T.digitalGift}Доставка по электронной почте{#else}Доставка с курьером{#/if}</h2>
+<h2 class="header" style="color:#0071BB">{#if $T.digitalGift}Доставка по электронной почте{#else}Доставка с курьером{#/if}</h2>
 <form >
     <div class="row">
         <div class="span7 left">
