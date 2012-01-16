@@ -9,8 +9,8 @@
                 <div class="b-login__note span7">
                     <div class="b-login__note__i">
                         <fieldset>
-                            <legend style="font-size:14pt">Добро пожаловать в систему &laquo;Карт Бланш&raquo;!</legend>
-                            <p style="padding-left:80px"><img src="app/img/logo_jj.png" alt="Johnson & Johnson LLC"/></p>
+                            <legend class="title">Добро пожаловать в систему &laquo;Карт Бланш&raquo;!</legend>
+                            <p class="logo"><img src="app/img/logo_jj.png" alt="Johnson & Johnson LLC"/></p>
                             <p>Введите номер вашего сертификата для дальнейшего выбора подарка</p>
                             <div class="clearfix">
                                 <div class="input">

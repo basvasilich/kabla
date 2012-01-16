@@ -18,3 +18,9 @@
     left: 0;
     position: absolute;
 }
+
+.b-splash .orderNum
+{
+    font-weight:bold;
+    font-size:14px;
+}

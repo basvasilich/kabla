@@ -21,6 +21,12 @@
     line-height: 1.4em;
 }
 
+.b-catalog__promo .team
+{
+    text-align: right;
+    padding: 20px 20px 20px 0;
+}
+
 .b-catalog__promo .bg {
     background: url('../img/cards/promo-partnercards.png');
     height: 192px;
@@ -123,9 +129,13 @@
 
 .b-catalog .kind
 {
-    /*width: 120px;*/
-    margin: 0 0 0 0;
-    /*margin: 10px auto 0 auto;*/
+    width: 120px;
+    margin: 0 auto 0 auto;
+}
+
+.b-catalog .kind_digital
+{
+    width: 170px;
 }
 
 .b-catalog .params

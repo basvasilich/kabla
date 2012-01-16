@@ -8,7 +8,5 @@
             </ul>
         </div>
     </div>
-    <!-- /topbar-inner -->
 </div>
-        <!-- /topbar -->
 {#/template MAIN}

@@ -1,5 +1,6 @@
-.b-topbar
+.topbar-wrapper
 {
+    z-index: 5;
     /*display: none;*/
 }
 .b-topbar .topbar-inner
