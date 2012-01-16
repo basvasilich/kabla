@@ -33,7 +33,7 @@ var App = (function() {
             var data;
             params.action = action
             $.ajax({
-                url: 'api/index.json',
+                url: 'api/',
                 type: 'POST',
                 data: params,
                 dataType: 'json',
