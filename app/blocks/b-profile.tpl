@@ -46,12 +46,12 @@
                                 <label for="address"><b>Адрес для доставки</b></label>
                                 <div class="input">
                                   <textarea rows="3" name="address" id="address" class="required large"></textarea>
-                                  <span class="help-block">Индекс, город, улица, дом, квартира</span>
+                                  <span class="help-block">Индекс, область, город, улица, дом, квартира/офис</span>
                                 </div>
                               </div>
                     {#/if}
                     <div class="b-profile__field  clearfix">
-                       <label for="comment">Примечание</label>
+                       <label for="comment">Комментарии</label>
                        <div class="input">
                          <textarea rows="3" name="comment" id="comment" class="large"></textarea>
                        </div>
