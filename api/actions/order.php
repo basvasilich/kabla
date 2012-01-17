@@ -45,12 +45,18 @@ else # ERROR
 # GET PARAMS
 
 $selected_product = $_REQUEST["gift"];
-$contact_name = $_REQUEST["name"];
-$contact_phone_code = $_REQUEST["mobileCode"];
-$contact_phone_number = $_REQUEST["mobileNumber"];
-$contact_email = $_REQUEST["email"];
+$contact_name = $_REQUEST["contact_name"];					if (empty($contact_name)) $contact_name = $_REQUEST["name"]; 
+$contact_phone_code = $_REQUEST["contact_phone_code"];		if (empty($contact_phone_code)) $contact_phone_code = $_REQUEST["mobileCode"];
+$contact_phone_number = $_REQUEST["contact_phone_number"];	if (empty($contact_phone_number)) $contact_phone_number = $_REQUEST["mobileNumber"];
+$contact_email = $_REQUEST['contact_email'];				if (empty($contact_email)) $contact_email = $_REQUEST["email"];
 $contact_city = $_REQUEST["city"];
 $contact_address = $_REQUEST["address"];
+$delivery_point_country = $_REQUEST["deliveryPoint_country"];
+$delivery_point_postcode = $_REQUEST["deliveryPoint_postcode"];
+$delivery_point_region = $_REQUEST["deliveryPoint_region"];
+$delivery_point_place = $_REQUEST["deliveryPoint_place"];
+$delivery_point_location = $_REQUEST["deliveryPoint_location"];
+$delivery_comment = $_REQUEST["deliveryComment"];
 $comment = $_REQUEST["comment"];
 
 # CHECK PRODUCT
@@ -96,8 +102,14 @@ $query_result = mysql_query(sprintf(
 		`CONTACT_EMAIL`,
 		`CONTACT_CITY`,
 		`CONTACT_ADDRESS`,
-		`COMMENT`
-		) VALUE('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+		`COMMENT`,
+		`DELIVERY_POINT_COUNTRY`,
+		`DELIVERY_POINT_POSTCODE`,
+		`DELIVERY_POINT_REGION`,
+		`DELIVERY_POINT_PLACE`,
+		`DELIVERY_POINT_LOCATION`,
+		`DELIVERY_COMMENT`
+		) VALUE('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
 	mysql_real_escape_string($access_gear_id),
 	mysql_real_escape_string($identity_token),
 	mysql_real_escape_string($contact_name),
@@ -106,7 +118,13 @@ $query_result = mysql_query(sprintf(
 	mysql_real_escape_string($contact_email),
 	mysql_real_escape_string($contact_city),
 	mysql_real_escape_string($contact_address),
-	mysql_real_escape_string($comment)
+	mysql_real_escape_string($comment),
+	mysql_real_escape_string($delivery_point_country),
+	mysql_real_escape_string($delivery_point_postcode),
+	mysql_real_escape_string($delivery_point_region),
+	mysql_real_escape_string($delivery_point_place),
+	mysql_real_escape_string($delivery_point_location),
+	mysql_real_escape_string($delivery_comment)
 ));
 
 if (!$query_result) # ERROR
