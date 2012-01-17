@@ -44,7 +44,7 @@
                         <label for="deliveryPoint.postcode">Индекс</label>
                         <div class="input">
                             <input maxlength="6" type="text" value="" name="deliveryPoint.postcode" id="deliveryPoint.postcode"
-                                   class="large input_onlyDigits"/>
+                                   class="span2 input_onlyDigits"/>
                         </div>
                     </div>
                     <div class="b-profile__field  clearfix">
