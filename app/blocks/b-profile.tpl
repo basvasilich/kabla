@@ -7,53 +7,72 @@
             <div class="lcol">
               <fieldset>
                     <div class="b-profile__field clearfix">
-                        <label for="name"><b>ФИО</b></label>
+                        <label for="contact.name"><b>ФИО</b></label>
 
                         <div class="input">
-                            <input type="text" value="" size="30" name="name" id="name" class="large required"/>
+                            <input type="text" value="" size="30" name="contact.name" id="contact.name" class="large required"/>
                             <span class="help-block">Полные данные</span>
                         </div>
                     </div>
                     <div class="b-profile__field clearfix">
-                        <label for="email"><b>Email</b></label>
+                        <label for="contact.email"><b>Email</b></label>
 
                         <div class="input">
-                            <input type="text" value="" size="30" name="email" id="email"
+                            <input type="text" value="" size="30" name="contact.email" id="contact.email"
                                    class="large required email {#if $T.digitalGift}required{#/if}"/>
                         </div>
                     </div>
                       <div class="b-profile__field clearfix">
-                        <label for="mobileCode"><b>Телефон</b></label>
+                        <label for="contact.phone.number"><b>Телефон</b></label>
                         <div class="input">
                             +7 ( <input type="text" value="" maxlength="3"
-                                        name="mobileCode" id="mobileCode" class="required span1 input_onlyDigits"/> )
+                                        name="contact.phone.code" id="contact.phone.code" class="required span1 input_onlyDigits"/> )
                             <input type="text" value="" maxlength="7"
-                                   name="mobileNumber" id="mobileNumber" class="required span2 input_onlyDigits"/>
+                                   name="contact.phone.number" id="contact.phone.number" class="required span2 input_onlyDigits"/>
                         </div>
                     </div>
                 </fieldset>
-
-
             </div>
         </div>
-
             <div class="span7 right">
             <div class="rcol">
                 <fieldset>
 
                     {#if !$T.digitalGift}
+                     <input type="hidden" value="RU" name="deliveryPoint.country" id="deliveryPoint.country"/>
                     <div class="b-profile__field  clearfix">
-                                <label for="address"><b>Адрес для доставки</b></label>
-                                <div class="input">
-                                  <textarea rows="3" name="address" id="address" class="required large"></textarea>
-                                  <span class="help-block">Индекс, область, город, улица, дом, квартира/офис</span>
-                                </div>
-                              </div>
+                        <label for="deliveryPoint.postcode">Индекс</label>
+                        <div class="input">
+                            <input maxlength="6" type="text" value="" name="deliveryPoint.postcode" id="deliveryPoint.postcode"
+                                   class="large input_onlyDigits"/>
+                        </div>
+                    </div>
+                    <div class="b-profile__field  clearfix">
+                        <label for="deliveryPoint.region">Область / край / район</label>
+                        <div class="input">
+                            <input maxlength="100" type="text" value="" name="deliveryPoint.region" id="deliveryPoint.region"
+                                   class="large"/>
+                        </div>
+                    </div>
+                    <div class="b-profile__field  clearfix">
+                        <label for="deliveryPoint.place"><b>Город / населённый пункт</b></label>
+                        <div class="input">
+                            <input maxlength="100" type="text" value="" name="deliveryPoint.place" id="deliveryPoint.place"
+                                   class="large required"/>
+                        </div>
+                    </div>
+                    <div class="b-profile__field  clearfix">
+                        <label for="deliveryPoint.location"><b>Адрес</b></label>
+                        <div class="input">
+                            <input maxlength="200" type="text" value="" name="deliveryPoint.location" id="deliveryPoint.location"
+                                   class="large required"/>
+                        </div>
+                    </div>
                     {#/if}
                     <div class="b-profile__field  clearfix">
-                       <label for="comment">Комментарии</label>
+                       <label for="deliveryComment">Комментарии</label>
                        <div class="input">
-                         <textarea rows="3" name="comment" id="comment" class="large"></textarea>
+                         <textarea rows="3" name="deliveryComment" id="deliveryComment" class="large"></textarea>
                        </div>
                      </div>
                 </fieldset>
