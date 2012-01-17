@@ -166,7 +166,17 @@ if (!$query_result) # ERROR
 mysql_query("COMMIT");
 
 $delivery_address = $contact_address;
-if (!isset($delivery_address)) $delivery_address = $contact_email;
+if (empty($delivery_address) && isset($delivery_point_place, $delivery_point_location))
+{
+	if (!empty($delivery_point_postcode)) $delivery_address .= $delivery_point_postcode;
+	if (!empty($delivery_point_region)) $delivery_address .= ", " . $delivery_point_region;
+	if (!empty($delivery_point_place)) $delivery_address .= ", " . $delivery_point_place;
+	if (!empty($delivery_point_location)) $delivery_address .= ", " . $delivery_point_location;
+}
+else
+{
+	if (!isset($delivery_address)) $delivery_address = $contact_email;
+}
 
 $from_name = "Boomcard";
 $from_address = "info@boomcard.ru";
