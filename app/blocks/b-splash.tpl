@@ -4,7 +4,7 @@
     <div class="finish">
         <h2>Поздравляем с выбором подарка!</h2>
 		<br/>
-        <div class="pic"><img src="app/img/super.png" alt=""/></div>
+        <div class="pic"><img src="app/img/super-new.png" alt=""/></div>
         <div class="promo-text">
             <p>Мы уже отправили вам электронное письмо с подтверждением вашего выбора.</p>
             <p>Номер вашего заказа &#151; <span class="orderNum">{$T.orderNumber}</span>.</p>
