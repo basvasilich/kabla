@@ -120,12 +120,12 @@ $(document).ready(function() {
 
     App.LoginView = Backbone.View.extend({
 
-        el: $('.b-login'),
+        el: $('.b-login_new'),
 
         initialize: function() {
-            $(".b-login").setTemplateURL("app/blocks/b-login.tpl");
-            $(".b-login").processTemplate();
-            App.allowOnlyDigits($(".b-login").find('input'));
+            $(".b-login_new").setTemplateURL("app/blocks/b-login.tpl");
+            $(".b-login_new").processTemplate();
+            App.allowOnlyDigits($(".b-login_new").find('input'));
         },
 
         couponVal: function() {
