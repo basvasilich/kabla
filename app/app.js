@@ -29,6 +29,12 @@ var App = (function() {
             return result;
         },
 
+        showError: function(control, kind) {
+            var message = $(control).find('.alert-message').filter('.' + kind);
+            $(control).find('.alert-message').hide();
+            message.fadeIn('fast')
+        },
+
         doAction: function(action, params, onSuccess, onError) {
             var data;
             params.action = action
@@ -131,9 +137,6 @@ $(document).ready(function() {
         couponVal: function() {
             return $(this.el).find('.b-login__couponField').val()
         } ,
-        messages: function() {
-            return $(this.el).find('.alert-message')
-        },
 
         events: {
             "click .primary": "checkForm"
@@ -150,34 +153,26 @@ $(document).ready(function() {
             }
 
         },
-
-        showMessage: function(kind) {
-            var message = this.messages().filter('.' + kind);
-            this.messages().hide();
-            message.fadeIn('fast')
-        },
-
-
         checkCoupon: function(coupon) {
             var that = this
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
                 App.doAction('identify', {'activation-code': coupon, "identification-type": "voucher"}, function(resultData){
                     App.user.set(resultData);
-                    $(that.messages()).hide();
+                    $(that.el).find('.alert-message').hide();
                     App.state.set({auth: true})
                     App.control.render();
                 },
                 function(result){
                     if(result['error-type'] == 'bad-activation-code'){
-                        that.showMessage('bad-code');
+                        App.showError(that.el, 'bad-code');
                     } else{
-                        that.showMessage('code-expired');
+                        App.showError(that.el, 'code-expired');
                     }
                 })
             }
             else {
-                that.showMessage('bad-code');
+                App.showError(that.el, 'bad-code');
             }
         }
 
@@ -230,17 +225,24 @@ $(document).ready(function() {
             evt.preventDefault()
 
             if ($(this.el).find('form').validate().form()) {
+
                 var data = $(this.el).find('form').serializeArray(),
                 model = {};
+
+                $(evt.target).button('loading');
 
                 $(data).each(function() {
                         if(this.name != 'personalCheck') model[this.name] = this.value;
                 })
                 App.user.set(model)
                 App.doAction('order', App.user.toJSON(), function(resultData) {
+                    $(evt.target).button('reset')
                     App.state.set({"orderNumber": resultData["order-number"]})
                     App.router.navigate('finish', true);
                     App.state.set({auth: false})
+                },
+                function(result){
+                    App.showError(that.el, 'fail');
                 })
             }
 

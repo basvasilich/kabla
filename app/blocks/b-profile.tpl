@@ -100,16 +100,21 @@
         </fieldset>
     </div>
     <div class="row">
+        <div class="b-profile__error">
+            <div class="alert-message warning fail">
+                <a href="#" class="close">×</a>
+                <p><strong>Заказ оформить не удалось.</strong> Попробуйте еще раз позже.</p>
+            </div>
+        </div>
         <div class="b-profile__actions">
             <div class="b-profile__actions__i">
                 <div class="actions b-profile__save">
-                    <input type="submit" value="Сделать заказ" class="btn large span5 primary">&nbsp;
+                    <button  data-loading-text="Заказ оформляется..." class="btn large span5 primary">Сделать заказ</button>&nbsp;
                     <button class="btn large reset" type="reset">Отменить</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </form>
+
         {#/template MAIN}

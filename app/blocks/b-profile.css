@@ -99,12 +99,23 @@
 }
 
 
-.b-profile__actions__i
+.b-profile__actions__i,
+.b-profile__error
 {
     padding-left: 20px;
 }
 
+.b-profile__actions .b-profile__save
+{
+    margin-top: 0;
+}
 
+.b-profile__error  .alert-message
+{
+    margin-bottom: 0;
+    display: none;
+    
+}
 .b-profile__actions .actions
 {
     padding-left: 214px;
@@ -131,3 +142,4 @@
 {
     margin-left: 234px;
 }
+
