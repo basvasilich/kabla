@@ -6,7 +6,7 @@
 .b-topbar .topbar-inner
 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
-    background: url("../img/headerBg.png") repeat-x scroll 0 0 #0073BC;
+    background: url("../../img/headerBg.png") repeat-x scroll 0 0 #0073BC;
 }
 
 .b-topbar .container h3 a

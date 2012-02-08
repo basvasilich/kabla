@@ -64,11 +64,11 @@ App = (function () {
             message.fadeIn('fast')
         },
 
-        doAction:function (action, params, onSuccess, onError) {
+        doAction: function (action, params, onSuccess, onError) {
             var data;
             params.action = action
             $.ajax({
-                url:'api/index.json',
+                url:'api/',
                 type:'POST',
                 data:params,
                 dataType:'json',

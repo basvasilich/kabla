@@ -28,7 +28,7 @@
 }
 
 .b-catalog__promo .bg {
-    background: url('../img/cards/promo-partnercards.png');
+    background: url('../../img/cards/promo-partnercards.png');
     height: 192px;
     left: -65px;
     position: absolute;
