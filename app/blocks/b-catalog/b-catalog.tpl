@@ -2,7 +2,7 @@
     <div class="b-catalog__i">
         <h2>Каталог подарков</h2>
         <div class="row">
-            <div class="span12">
+            <div class="span15">
                 <div class="b-catalog__promo">
                     <div class="bg"></div>
                     <p>Представляем вам список подарочных карт и электронных сертификатов, из которого вы можете выбрать один на своё усмотрение.</p>
@@ -38,15 +38,15 @@
     <div class="partners-row popup-dock ">
 
         <div class="partner-pic">
-            <img src="{$T.img}" alt="{$T.title}"/>
+            <img src="{$T.img}" alt="{$T.name}"/>
             {#if $T.digital}<div class="kind kind_digital"><span class="label success">Электронный сертификат</span></div>{#else}<div class="kind kind_analog"><span class="label notice">Подарочная карта</span></div>{#/if}
         </div>
         <div class="partner-text">
-            <p class="">{$T.text}</p>
+            <p class="">{$T.description}</p>
         </div>
         <div class="partner-form">
             <div class="card-form">
-                <a class="btn large">Выбрать</a>
+                <a class="btn btn-large">Выбрать</a>
             </div>
         </div>
         <form class="params">

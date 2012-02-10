@@ -8,9 +8,8 @@ define(function () {
 
         render:function () {
             App.state.unset('digitalGift')
-            var catalog = App.getLocalData('catalog');
-            App.state.set({'catalog':catalog})
-            $(this.el).processTemplate(catalog);
+
+            $(this.el).processTemplate( App.state.get('catalog'));
             $(this.el).find('.partners-row').hover(function () {
                 $(this).addClass('hover');
             }, function () {
@@ -49,15 +48,16 @@ define(function () {
 
 
     App.CatalogShortView = Backbone.View.extend({
+
         render:function () {
             var data = App.state.get('catalog')
             var position
 
-            $('.b-catalog_short').setTemplateURL("app/blocks/b-catalog/b-catalog_short.tpl");
 
             $(data).each(function () {
                 if (this['id'] == App.user.get('gift')) position = this
             })
+            $('.b-catalog_short').setTemplateURL("app/blocks/b-catalog/b-catalog_short.tpl");
             $('.b-catalog_short').processTemplate(position);
         }
     })

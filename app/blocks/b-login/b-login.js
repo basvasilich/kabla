@@ -15,21 +15,34 @@ define(function () {
         },
 
         events:{
-            "click .primary":"checkForm"
+            "click .btn-primary":"checkForm"
         },
 
         checkForm:function (evt) {
+            that = this
             var coupon = $(this.el).find('.b-login__couponField').val()
             evt.preventDefault()
+            $(evt.target).button('loading');
             if (coupon) {
                 if (App.checkCoupon(coupon)) {
-                    App.control.render();
+                    if(!App.state.get('catalog')) App.doAction({
+                        action: 'get-products',
+                        success: function(data){
+                            App.state.set({'catalog': data})
+                            $(evt.target).button('reset')
+                            App.control.render();
+                        },
+                        error: function (result) {
+                            App.showError(that.el, 'fail');
+                        }
+                    })
                 } else {
                     if (App.state.get('error-type') == 'bad-activation-code') {
                         App.showError(this.el, 'bad-code');
-
+                        $(evt.target).button('reset')
                     } else {
                         App.showError(this.el, 'code-expired');
+                        $(evt.target).button('reset')
                         App.eraseCookie('kabla')
                     }
                 }

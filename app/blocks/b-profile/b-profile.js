@@ -12,7 +12,7 @@ define(function () {
             $(this.el).find('form').validate({
                 showErrors:function (errorMap, errorList) {
                     $(errorList).each(function () {
-                        $(this.element).parents('.clearfix').addClass('error')
+                        $(this.element).parents('.control-group').addClass('error')
                     })
                 }
             })
@@ -22,8 +22,8 @@ define(function () {
         },
 
         events:{
-            "click .b-profile__save .primary":"saveForm",
-            "click .b-profile__save .reset":"cancelForm",
+            "click .b-profile__save .btn-primary":"saveForm",
+            "click .b-profile__save .btn-reset":"cancelForm",
             "keydown .b-profile input":"cleanErrors"
         },
 
@@ -35,7 +35,7 @@ define(function () {
         },
 
         cleanErrors:function () {
-            $(this.el).find('.clearfix').removeClass('error')
+            $(this.el).find('.control-group').removeClass('error')
         },
 
         saveForm:function (evt) {
@@ -52,15 +52,19 @@ define(function () {
                     if (this.name != 'personalCheck') model[this.name] = this.value;
                 })
                 App.user.set(model)
-                App.doAction('order', App.user.toJSON(), function (resultData) {
+                App.doAction({
+                    action: 'order',
+                    data: App.user.toJSON(),
+                    success: function (resultData) {
                         $(evt.target).button('reset')
                         App.state.set({"orderNumber":resultData["order-number"]})
                         App.router.navigate('finish', true);
                         App.state.set({auth:false})
                     },
-                    function (result) {
+                    error: function (result) {
                         App.showError(that.el, 'fail');
-                    })
+                    }
+                })
             }
         },
         cancelForm:function () {

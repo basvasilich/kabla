@@ -1,15 +1,15 @@
-.topbar-wrapper
+.navbar-wrapper
 {
     z-index: 5;
     /*display: none;*/
 }
-.b-topbar .topbar-inner
+.b-topbar .navbar-inner
 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
     background: url("../../img/headerBg.png") repeat-x scroll 0 0 #0073BC;
 }
 
-.b-topbar .container h3 a
+.b-topbar .container a.brand
 {
     padding-top: 4px;
     padding-bottom: 4px;
@@ -31,13 +31,13 @@
     border-color: #009fe3;
 }
 
-.b-topbar.topbar a
+.b-topbar.navbar a
 {
    color: #fff;
 }
 
-.b-topbar .topbar-inner .secondary-nav .dropdown.open .dropdown-toggle {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+.b-topbar.navbar .nav li a {
+    background: none;
     color: #FFFFFF;
 }
 

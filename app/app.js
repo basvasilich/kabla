@@ -59,29 +59,35 @@ App = (function () {
         },
 
         showError:function (control, kind) {
-            var message = $(control).find('.alert-message').filter('.' + kind);
-            $(control).find('.alert-message').hide();
+            var message = $(control).find('.alert').filter('.' + kind);
+            $(control).find('.alert').hide();
             message.fadeIn('fast')
         },
 
-        doAction: function (action, params, onSuccess, onError) {
-            var data;
-            params.action = action
+        closeErrors:function () {
+            $('.b-app').find('.alert').fadeOut('fast');
+            App.state.clean('error-type');
+        },
+
+        doAction: function (params) {
+
+            var request = params.data || {}
+            request.action = params.action
             $.ajax({
                 url:'api/',
                 type:'POST',
-                data:params,
+                data: request,
                 dataType:'json',
                 async:false,
-                success:function (result) {
+                success: function (result) {
                     if (result.status == 'ok') {
-                        if (onSuccess) onSuccess(result.data);
+                        if (params.success)  params.success(result.data);
                     } else {
-                        if (onError) onError((result));
+                        if (params.error)  params.error((result));
                     }
                 },
                 error:function () {
-                    if (onError) onError();
+                    if (params.onError) params.onError();
                 }
             })
         },
@@ -105,17 +111,19 @@ App = (function () {
             var status = false;
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
-                App.doAction('identify', {"activation-code":coupon, "identification-type":"voucher"},
-                    function (resultData) {
+                App.doAction({
+                    action: 'identify',
+                    data: {"activation-code":coupon, "identification-type":"voucher"},
+                    success: function (resultData) {
                         App.user.set(resultData);
                         App.state.set({auth:true})
                         App.createCookie('kabla', '{"coupon":"' + coupon + '"}', 15)
                         status = true;
                     },
-                    function (result) {
+                    error: function (result) {
                         status = false;
                         App.state.set({"error-type":result["error-type"]})
-                    })
+                    }})
                 return status;
             }
             else {
@@ -126,6 +134,7 @@ App = (function () {
     }
 })();
 
+App.init();
 
 require([
     "blocks/b-app/b-app",
@@ -137,6 +146,8 @@ require([
     "blocks/router",
     "config"
 ], function () {
+        Backbone.history.start()
+
         if (App.state.get('auth')) {
             App.control.render()
         } else {

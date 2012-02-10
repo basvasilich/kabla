@@ -59,5 +59,4 @@ define( function(){
         });
 
         App.router = new App.Workspace
-        Backbone.history.start()
 })

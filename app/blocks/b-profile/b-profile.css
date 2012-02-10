@@ -110,15 +110,16 @@
     margin-top: 0;
 }
 
-.b-profile__error  .alert-message
+.b-profile__error  .alert
 {
     margin-bottom: 0;
+    padding-left: 157px;
     display: none;
     
 }
-.b-profile__actions .actions
+.b-profile .b-profile__actions .form-actions
 {
-    padding-left: 214px;
+    padding-left: 135px;
     margin-bottom: 0;
 }
 
@@ -127,19 +128,9 @@
     color: #B94A48;
 }
 
-
-.b-profile .left
-{
-    padding-left: 44px;
-}
-
 .b-profile .header
 {
     padding: 20px 0 20px 20px;
 }
 
-.b-profile .check .input
-{
-    margin-left: 234px;
-}
 

@@ -1,5 +1,5 @@
 define(function(){
-    App.init();
+
 
     App.AppView = Backbone.View.extend({
         el: $('.b-app'),
@@ -17,7 +17,7 @@ define(function(){
         },
 
         events: {
-            "click .alert-message .close": "messageClose"
+            "click .alert .close": "messageClose"
         },
 
         exit: function(){
@@ -30,7 +30,7 @@ define(function(){
 
         messageClose: function(evt){
             evt.preventDefault()
-            $(evt.target).parents('.alert-message').fadeOut('fast');
+            App.closeErrors()
         }
     })
     App.control = new App.AppView()
