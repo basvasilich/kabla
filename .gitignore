@@ -4,4 +4,6 @@ app/blocks/.DS_Store
 
 .DS_Store
 
+.apdisk
+
 api/index.json
