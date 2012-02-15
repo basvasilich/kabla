@@ -143,6 +143,7 @@ require([
     "blocks/b-profile/b-profile",
     "blocks/b-splash/b-splash",
     "blocks/b-wizard-nav/b-wizard-nav",
+    "blocks/b-account/b-account",
     "blocks/router",
     "config"
 ], function () {

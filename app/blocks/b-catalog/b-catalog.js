@@ -19,7 +19,7 @@ define(function () {
         },
 
         events:{
-            "click .partners-row":"initShipping"
+            "click .partners-row": "addToOrder"
         },
 
         show:function () {
@@ -41,6 +41,22 @@ define(function () {
             App.user.set({'gift':params.gift});
             if (params.digital) App.state.set({'digitalGift':true})
             App.router.navigate('profile', true)
+        },
+        addToOrder: function(evt){
+            evt.preventDefault();
+            var row = $(evt.target).parents('.partners-row');
+            var data = $(evt.target).parents('.partners-row').find('.params').serializeArray()
+            var params = {}
+            $(data).each(function () {
+                params[this.name] = this.value;
+            })
+
+            if (params.digital) App.state.set({'digitalGift':true})
+
+            var order = App.user.get('order') || []
+            order.push({gift: params.gift, nominal: params.nominal})
+            App.user.set('order',  order)
+            $('.b-account').addClass('b-account_isOrder')
         }
     });
 

@@ -5,13 +5,15 @@ define(function(){
         el: $('.b-app'),
 
         initialize: function(){
-            $(".topbar-wrapper").setTemplateURL("app/blocks/b-topbar/b-topbar.tpl");
+            $(".tpl-topbar").setTemplateURL("app/blocks/b-topbar/b-topbar.tpl");
             if(App.user.get('coupon')) App.checkCoupon(App.user.get('coupon'))
         },
 
         render: function(){
-            $(".topbar-wrapper").processTemplate();
+            $(".tpl-topbar").processTemplate();
             App.wizardNav.render()
+            App.doAction({action:"get-account-info", success: function(data){App.user.set(data)}})
+            App.account.render()
             $(this.el).addClass('b-app_wizardMode')
             App.router.navigate('start',true)
         },
