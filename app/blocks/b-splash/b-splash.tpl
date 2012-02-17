@@ -23,7 +23,7 @@
         </div>
 		<br/>
         <div class="promo-button">
-            <a class="btn large primary" href="#catalog">Выбрать подарок</a>
+            <a data-loading-text="Загрузка..." class="btn btn-large btn-primary" href="#catalog">Выбрать подарок</a>
         </div>
     </div>
     {#/if}

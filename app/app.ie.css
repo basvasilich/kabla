@@ -1,13 +1,5 @@
-.b-login__note__i legend
-{
-   zoom: 1;
-   padding: 0;
-   margin: 0;
-    width: 400px;
-    font-size: 16px;
-}
 
-.b-login  .form-stacked .b-login__actions
+.b-login  .form .b-login__actions
 {
     margin-bottom: -20px;
     zoom: 1;
@@ -19,18 +11,6 @@
 }
 
 .partners-row,
-.b-topbar h3 a,
-.b-topbar h3,
 {
     zoom: 1;
-}
-
-.b-topbar h3
-{
-    float: left;
-}
-
-.b-profile fieldset
-{
-    border: 0
 }

@@ -6,11 +6,11 @@
                 <div id="partners-list">
                     <div class="partners-row popup-dock ">
                            <div class="partner-pic">
-                               <img src="{$T.img}" alt="{$T.title}"/>
-                               {#if $T.digital}<div class="kind kind_digital"><span class="label success">Электронный</span></div>{#else}<div class="kind kind_analog"><span class="label notice">Пластиковый</span></div>{#/if}
+                               <img src="{$T.img}" alt="{$T.name}"/>
+                               {#if $T.digital}<div class="kind kind_digital"><span class="label label-success">Электронный</span></div>{#else}<div class="kind kind_analog"><span class="label label-notice">Пластиковый</span></div>{#/if}
                            </div>
                            <div class="partner-text">
-                               <p class="">{$T.text}</p>
+                               <p class="">{$T.description}</p>
                            </div>
                        </div>
                    </div>
