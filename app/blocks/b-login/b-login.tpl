@@ -10,9 +10,9 @@
                     <div class="b-login__note__i">
                         <p class="b-login__title">Добро пожаловать в систему &laquo;Карт Бланш&raquo;!</p>
 
-                        <p class="logo"><img src="app/img/logo_jj.png" alt="Johnson & Johnson LLC"/></p>
+                        <p class="logo"><img src="app/img/logo_akvion.jpg" alt="Аквион" width="200"/></p>
 
-                        <p>Введите номер сертификата для выбора подарка</p>
+                        <p style="text-align:left">Введите номер сертификата</p>
 
                         <div class="clearfix">
                             <div class="input">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="b-login__header"><img src="app/img/logo_jj.png" alt=""/></div>-->
+                <!--<div class="b-login__header"><img src="app/img/logo_akvion.jpg" alt=""/></div>-->
                 <div class="form-actions b-login__actions">
                     <button data-loading-text="Загрузка..." type="submit" class="btn-large btn-primary">Войти</button>
                 </div>
