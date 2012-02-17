@@ -1,16 +1,18 @@
 <?php
 
 # ACTION DISPATCHER
-# Copyright ©, 2011 Smekalka
+# COPYRIGHT: 2011-2012, Smekalka
+
+include_once("./lib/functions.php");
 
 mb_internal_encoding("UTF-8");
 error_reporting(E_ERROR | E_PARSE);
 
 $config = array();
-include_once("./config/db.conf.php");
-include_once("./config/smtp.conf.php");
+include_once("./config/configuration.php");
 
 $action_name = $_REQUEST["action"];
+$action_version = $_REQUEST["version"];
 
 $action_result = array(
 	"action" => $action_name,

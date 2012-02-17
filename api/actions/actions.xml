@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<action-directory>
+	<actions>
+		<action name="identify" version="1">
+			<body type="script" language="php" ref="{$home}/actions/identify.php"/>
+			<description>Authenticates user using an access device</description>
+		</action>
+		<action name="get-account-info" version="1">
+			<body type="script" language="php" ref="{$home}/actions/get-account-info.php"/>
+			<description>Provides account information</description>
+		</action>
+		<action name="get-offer-list" version="1">
+			<body type="script" language="php" ref="{$home}/actions/get-offer-list.php"/>
+			<description>Provides personalized offer list for the specified customer</description>
+		</action>
+		<action name="order" version="1">
+			<body type="script" language="php" ref="{$home}/actions/order.php"/>
+			<description>Posts an order</description>
+		</action>
+	</actions>
+	<bundles>
+		<bundle name "kabla" version="0.1">
+			<action-ref name="identify" version="1"/>
+			<action-ref name="get-account-info" version="1"/>
+			<action-ref name="get-offer-list" version="1"/>
+			<action-ref name="order" version="1"/>
+			<description>Kabla API alpha</description>
+		</bundle>
+	</bundles>
+</action-directory>

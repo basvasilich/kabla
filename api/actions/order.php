@@ -1,7 +1,9 @@
 <?php
 
-# ACTION: Order
-# Copyright ©, 2011 Smekalka
+# ACTION: order
+# VERSION: 1
+# DESCRIPTION: Posts an order
+# COPYRIGHT: 2011-2012, Smekalka
 
 $identity_token = $_REQUEST["token"];
 
