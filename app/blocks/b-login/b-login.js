@@ -40,8 +40,12 @@ define(function () {
                     if (App.state.get('error-type') == 'bad-activation-code') {
                         App.showError(this.el, 'bad-code');
                         $(evt.target).button('reset')
-                    } else {
+                    } else if(App.state.get('error-type') == 'code-expired') {
                         App.showError(this.el, 'code-expired');
+                        $(evt.target).button('reset')
+                        App.eraseCookie('kabla')
+                    } else {
+                        App.showError(this.el, 'fail');
                         $(evt.target).button('reset')
                         App.eraseCookie('kabla')
                     }
