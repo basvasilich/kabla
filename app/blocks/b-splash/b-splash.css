@@ -24,3 +24,20 @@
     font-weight:bold;
     font-size:14px;
 }
+
+
+.b-splash .start_splash
+{
+    position: static;
+}
+
+.b-splash .start_splash .pic
+{
+    top: 40px;
+    left: 50%;
+    margin-left: -500px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0 0  6px 6px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}

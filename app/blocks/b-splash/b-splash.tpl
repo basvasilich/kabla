@@ -14,17 +14,18 @@
         </div>
     </div>
     {#else}
-    <div class="start">
-        <h2>Добро пожаловать!</h2>
-		<br/>
-        <div class="pic"><img src="app/img/promo-giftcards.png" alt=""/></div>
-        <div class="promo-text">
-            <p>Добро пожаловать в систему Карт Бланш! Карт Бланш &#151; это уникальная поздравительная система, которая позволяет выбрать действительно нужный подарок. Вам понадобится не более 5 минут, чтобы оформить свой выбор. Мы делаем умные и удобные подарки.</p>
-        </div>
-		<br/>
-        <div class="promo-button">
-            <a data-loading-text="Загрузка..." class="btn btn-large btn-primary" href="#catalog">Выбрать подарок</a>
-        </div>
+    <div class="start start_splash">
+        <!--<h2>Добро пожаловать!</h2>-->
+		<!--<br/>-->
+        <!--<div class="pic"><img src="app/img/promo-giftcards.png" alt=""/></div>-->
+        <div class="pic"><img src="app/img/marafon.png" alt=""/></div>
+        <!--<div class="promo-text">-->
+            <!--<p>Добро пожаловать в систему Карт Бланш! Карт Бланш &#151; это уникальная поздравительная система, которая позволяет выбрать действительно нужный подарок. Вам понадобится не более 5 минут, чтобы оформить свой выбор. Мы делаем умные и удобные подарки.</p>-->
+        <!--</div>-->
+		<!--<br/>-->
+        <!--<div class="promo-button">-->
+            <!--<a data-loading-text="Загрузка..." class="btn btn-large btn-primary" href="#catalog">Выбрать подарок</a>-->
+        <!--</div>-->
     </div>
     {#/if}
 </div>
