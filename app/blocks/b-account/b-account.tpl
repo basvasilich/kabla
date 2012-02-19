@@ -8,6 +8,7 @@
     <span class="account__backet">
       <span class="account__backet__title">В вашем заказе —</span>
       <span class="account__backet__val"></span>
+      <button class="btn btn-success" href="#">Сделать заказ</button>
     </span>
 </div>
 {#/template MAIN}

@@ -3,7 +3,7 @@
     float: left;
     margin-left: 1em;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 11px;
 }
 
@@ -16,4 +16,11 @@
 .b-account_isOrder .account__backet
 {
     display: inline;
+}
+
+.navbar .b-account  .account__backet .btn
+{
+    margin: -7px 0 0 5px;
+    position: relative;
+    top: 3px;
 }

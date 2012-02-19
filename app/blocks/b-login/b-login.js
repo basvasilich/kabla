@@ -20,11 +20,11 @@ define(function () {
 
         checkForm:function (evt) {
             that = this
-            var coupon = $(this.el).find('.b-login__couponField').val()
+            var code = $(this.el).find('.b-login__codeField').val()
             evt.preventDefault()
             $(evt.target).button('loading');
-            if (coupon) {
-                if (App.checkCoupon(coupon)) {
+            if (code) {
+                if (App.checkCode(code)) {
                     if(!App.state.get('catalog')) App.doAction({
                         action: 'get-products',
                         success: function(data){
@@ -37,11 +37,8 @@ define(function () {
                         }
                     })
                 } else {
-                    if (App.state.get('error-type') == 'bad-activation-code') {
-                        App.showError(this.el, 'bad-activation-code');
-                        $(evt.target).button('reset')
-                    } else if(App.state.get('error-type') == 'code-expired') {
-                        App.showError(this.el, 'code-expired');
+                    if (App.state.get('errorType') == 'bad-activation-code' | App.state.get('errorType') == 'code-expired') {
+                        App.showError(this.el, App.state.get('errorType'));
                         $(evt.target).button('reset')
                         App.eraseCookie('kabla')
                     } else {

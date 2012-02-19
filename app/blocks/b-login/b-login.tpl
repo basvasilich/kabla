@@ -16,8 +16,8 @@
 
                         <div class="clearfix">
                             <div class="input">
-                                <input class="b-login__couponField"
-                                       id="loginCoupon" maxlength="8" name="loginCoupon" type="text"/>
+                                <input class="b-login__codeField"
+                                       id="logincode" maxlength="8" name="logincode" type="text"/>
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ define(function(){
 
         initialize: function(){
             $(".tpl-topbar").setTemplateURL("app/blocks/b-topbar/b-topbar.tpl");
-            if(App.user.get('coupon')) App.checkCoupon(App.user.get('coupon'))
+            if(App.user.get('code')) App.checkCode(App.user.get('code'))
         },
 
         render: function(){

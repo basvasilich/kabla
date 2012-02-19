@@ -66,7 +66,7 @@ App = (function () {
 
         closeErrors:function () {
             $('.b-app').find('.alert').fadeOut('fast');
-            App.state.clean('error-type');
+            App.state.clean('errorType');
         },
 
         doAction: function (params) {
@@ -108,27 +108,27 @@ App = (function () {
             });
         },
 
-        checkCoupon:function (coupon) {
+        checkCode:function (code) {
             var status = false;
-            if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
-                coupon = parseInt(coupon);
+            if (String(code).search(/^\s*\d+\s*$/) != -1) {
+                code = parseInt(code);
                 App.doAction({
                     action: 'auth',
-                    data: {"access-code":coupon, "auth-type": "access-code"},
+                    data: {"passKey":code, "authType": "PassKey"},
                     success: function (resultData) {
                         App.user.set(resultData);
                         App.state.set({auth:true})
-                        App.createCookie('kabla', '{"coupon":"' + coupon + '"}', 15)
+                        App.createCookie('kabla', '{"code":"' + code + '"}', 15)
                         status = true;
                     },
                     error: function (result) {
                         status = false;
-                        App.state.set({"error-type":result["error-type"]})
+                        App.state.set({"errorType":result["errorType"]})
                     }})
                 return status;
             }
             else {
-                App.state.set({"error-type":"bad-activation-code"})
+                App.state.set({"errorType":"bad-activation-code"})
                 return status;
             }
         },
