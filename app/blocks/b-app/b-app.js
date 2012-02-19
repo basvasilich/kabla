@@ -12,7 +12,7 @@ define(function(){
         render: function(){
             $(".tpl-topbar").processTemplate();
             App.wizardNav.render()
-            App.doAction({action:"get-account-info", success: function(data){App.user.set(data)}})
+            App.doAction({action:"getAccountInfo", success: function(data){App.user.set(data)}})
             App.account.render()
             $(this.el).addClass('b-app_wizardMode')
             App.router.navigate('start',true)
