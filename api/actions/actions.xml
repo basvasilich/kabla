@@ -5,13 +5,25 @@
 			<body type="script" language="php" ref="{$home}/actions/auth.php"/>
 			<description>Authenticates user using an access device</description>
 		</action>
-		<action name="get-account-info" version="1">
-			<body type="script" language="php" ref="{$home}/actions/get-account-info.php"/>
+		<action name="Account.get" version="1">
+			<body type="script" language="php" ref="{$home}/actions/getAccountInfo.php"/>
 			<description>Provides account information</description>
 		</action>
-		<action name="get-offer-info" version="1">
-			<body type="script" language="php" ref="{$home}/actions/get-offer-info.php"/>
+		<action name="Offer.get" version="1">
+			<body type="script" language="php" ref="{$home}/actions/getOfferInfo.php"/>
 			<description>Provides personalized offer list for the specified customer</description>
+		</action>
+		<action name="PurchaseOrder.get" version="1">
+			<body type="script" language="php" ref="{$home}/actions/PurchaseOrder.get.php"/>
+			<description>…</description>
+		</action>
+		<action name="PurchaseOrder.set" version="1">
+			<body type="script" language="php" ref="{$home}/actions/PurchaseOrder.set.php"/>
+			<description>…</description>
+		</action>
+		<action name="PurchaseOrder.commit" version="1">
+			<body type="script" language="php" ref="{$home}/actions/PurchaseOrder.commit.php"/>
+			<description>…</description>
 		</action>
 		<action name="order" version="1">
 			<body type="script" language="php" ref="{$home}/actions/order.php"/>
