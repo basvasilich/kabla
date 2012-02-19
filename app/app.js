@@ -113,7 +113,7 @@ App = (function () {
                 coupon = parseInt(coupon);
                 App.doAction({
                     action: 'identify',
-                    data: {"activation-code":coupon, "auth-type": "access-code"},
+                    data: {"access-code":coupon, "auth-type": "access-code"},
                     success: function (resultData) {
                         App.user.set(resultData);
                         App.state.set({auth:true})
