@@ -11,6 +11,11 @@ define(function () {
         render:function () {
             $(".b-login_new").processTemplate();
             App.allowOnlyDigits($(".b-login_new").find('input'));
+            if(!App.state.get('catalog')) App.doAction({
+                action: 'get-products',
+                success: function(data){
+                    App.state.set({'catalog': data})
+                }})
             return this;
         },
 
@@ -25,23 +30,22 @@ define(function () {
             $(evt.target).button('loading');
             if (coupon) {
                 if (App.checkCoupon(coupon)) {
-                    if(!App.state.get('catalog')) App.doAction({
-                        action: 'get-products',
-                        success: function(data){
-                            App.state.set({'catalog': data})
-                            $(evt.target).button('reset')
-                            App.control.render();
-                        },
-                        error: function (result) {
-                            App.showError(that.el, 'fail');
-                        }
-                    })
+                    if(App.state.get('catalog')) {
+                        $(evt.target).button('reset')
+                        App.control.render();
+                    } else {
+                        App.showError(that.el, 'fail');
+                    }
                 } else {
                     if (App.state.get('error-type') == 'bad-activation-code') {
                         App.showError(this.el, 'bad-code');
                         $(evt.target).button('reset')
-                    } else {
+                    } else if(App.state.get('error-type') == 'code-expired') {
                         App.showError(this.el, 'code-expired');
+                        $(evt.target).button('reset')
+                        App.eraseCookie('kabla')
+                    } else {
+                        App.showError(this.el, 'fail');
                         $(evt.target).button('reset')
                         App.eraseCookie('kabla')
                     }

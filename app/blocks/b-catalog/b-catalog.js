@@ -55,8 +55,8 @@ define(function () {
 
             var order = App.user.get('order') || []
             order.push({gift: params.gift, nominal: params.nominal})
-            App.user.set('order',  order)
-            $('.b-account').addClass('b-account_isOrder')
+            App.user.set({'order':  order})
+            App.account.orderUpdate()
         }
     });
 

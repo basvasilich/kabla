@@ -113,7 +113,7 @@ App = (function () {
                 coupon = parseInt(coupon);
                 App.doAction({
                     action: 'identify',
-                    data: {"activation-code":coupon, "identification-type":"voucher"},
+                    data: {"activation-code":coupon, "auth-type": "access-code"},
                     success: function (resultData) {
                         App.user.set(resultData);
                         App.state.set({auth:true})
@@ -130,6 +130,11 @@ App = (function () {
                 App.state.set({"error-type":"bad-activation-code"})
                 return status;
             }
+        },
+
+        declOfNum: function (number, titles){
+            cases = [2, 0, 1, 1, 1, 2];
+            return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
         }
     }
 })();
@@ -145,7 +150,8 @@ require([
     "blocks/b-wizard-nav/b-wizard-nav",
     "blocks/b-account/b-account",
     "blocks/router",
-    "config"
+    "../data/config",
+    "../data/loc"
 ], function () {
         Backbone.history.start()
 
