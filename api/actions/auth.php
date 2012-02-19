@@ -3,23 +3,20 @@
 # ACTION: Identify
 # Copyright ©, 2011 Smekalka
 
-$auth_type = $_REQUEST["authType"];
-if (!$auth_type) $auth_type = $_REQUEST["identification-type"];
 $current_access_point = $_SERVER["REMOTE_ADDR"];
-
+$auth_type = $_REQUEST["authType"];
 $access_device_record = null;
 		
 # VOUCHER IDENTIFICATION
-if ($auth_type == "AuthCode" || $auth_type == "voucher")
+if ($auth_type == "PassKey")
 {
-	$access_code = $_REQUEST["authCode"];
-	if (!$access_code) $access_code = $_REQUEST["activation-code"];
+	$pass_key = $_REQUEST["passKey"];
 	
-	$query_result = mysql_query(sprintf("SELECT * FROM V_ACCESS_DEVICE_AUTH_CODE WHERE AUTH_CODE = '%s'", mysql_real_escape_string($access_code)));
+	$query_result = mysql_query(sprintf("SELECT * FROM V_ACCESS_DEVICE_PASS_KEY WHERE PASS_KEY = '%s'", mysql_real_escape_string($pass_key)));
 	if (!$query_result) {
 		$action_result["status"] = "failed";
-		$action_result["error-type"] = "ServerError";
-		$action_result["error-message"] = "Invalid query: " . mysql_error();
+		$action_result["errorType"] = "ServerError";
+		$action_result["errorMessage"] = "Invalid query: " . mysql_error();
 			
 		exit();
 	}
@@ -39,7 +36,7 @@ else if ($auth_type == "user")
 else # ERROR
 {
 	$action_result["status"] = "failed";
-	$action_result["error-type"] = "UnsupportedAuthType";
+	$action_result["errorType"] = "UnsupportedAuthType";
 	
 	exit();
 }
@@ -47,16 +44,16 @@ else # ERROR
 if ($access_device_record)
 {
 	$access_device_id =			$access_device_record["ID"];
+	$identity_id =				$access_device_record["IDENTITY_ID"];
 	$issue_datetime =			$access_device_record["ISSUE_DT"];
 	$expiry_datetime =			$access_device_record["EXPIRY_DT"];
 	$activation_datetime =		$access_device_record["ACTIVATION_DT"];
 	$deactivation_datetime =	$access_device_record["DEACTIVATION_DT"];
-	$activation_date =			$access_device_record["ACTIVATION_DATE"];
 	
-	if ($activation_date && $access_code != "55555555") # ERROR
+	if ($deactivation_datetime && $pass_key != "55555555") # ERROR
 	{
 		$action_result["status"] = "failed";
-		$action_result["error-type"] = "ExpiredAuthData";
+		$action_result["errorType"] = "ExpiredAuthData";
 	
 		exit();
 	}
@@ -68,8 +65,8 @@ if ($access_device_record)
 	$query_result = mysql_query(sprintf("SELECT * FROM ACCESS_GEAR_IDENTITY_TOKEN WHERE ACCESS_GEAR_ID = %s AND ACCESS_POINT = '%s'", $access_device_id,  mysql_real_escape_string($current_access_point)));
 	if (!$query_result) {
 		$action_result["status"] = "failed";
-		$action_result["error-type"] = "ServerError";
-		$action_result["error-message"] = "Invalid query: " . mysql_error();
+		$action_result["errorType"] = "ServerError";
+		$action_result["errorMessage"] = "Invalid query: " . mysql_error();
 			
 		exit();
 	}
@@ -92,7 +89,7 @@ if ($access_device_record)
 	if (!$identity_token)
 	{
 		$identity_token = uniqid();
-		mysql_query(sprintf("INSERT ACCESS_GEAR_IDENTITY_TOKEN(IDENTITY_TOKEN, ACCESS_POINT, ACCESS_GEAR_ID) VALUE('%s', '%s', %s)", $identity_token, mysql_real_escape_string($current_access_point), $access_device_id));
+		mysql_query(sprintf("INSERT ACCESS_GEAR_IDENTITY_TOKEN(IDENTITY_TOKEN, ACCESS_POINT, ACCESS_GEAR_ID, IDENTITY_ID) VALUE('%s', '%s', %s, %s)", $identity_token, mysql_real_escape_string($current_access_point), $access_device_id, $identity_id));
 	}
 	
 	$action_result["data"] = array("token" => $identity_token);
@@ -101,7 +98,7 @@ if ($access_device_record)
 else # ERROR
 {
 	$action_result["status"] = "failed";
-	$action_result["error-type"] = "InvalidAuthData";
+	$action_result["errorType"] = "InvalidAuthData";
 	
 	exit();
 }

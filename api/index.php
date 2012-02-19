@@ -16,6 +16,7 @@ $action_version = $_REQUEST["version"];
 
 $action_result = array(
 	"action" => $action_name,
+	"runId" => "",
 	"timestamp" => "",
 	"status" => "unknown"
 );
@@ -45,16 +46,16 @@ header("Content-Transfer-Encoding: binary");
 
 if (!in_array($_SERVER["REQUEST_METHOD"], $allowed_methods)) # ERROR
 {
-	$action_result["status"] = "failed";
-	$action_result["error-type"] = "deprecated-invocation-method";
+	$action_result["status"] = "Failed";
+	$action_result["errorType"] = "DeprecatedInvocationMethod";
 	
 	exit();
 }
 
 if (!$action_name) # ERROR
 {
-	$action_result["status"] = "failed";
-	$action_result["error-type"] = "no-action-name-specified";
+	$action_result["status"] = "Failed";
+	$action_result["errorType"] = "NoActionNameSpecified";
 
 	exit();
 }
@@ -63,18 +64,20 @@ $action_file = "./actions/${action_name}.php";
 
 if (!file_exists($action_file)) # ERROR
 {
-	$action_result["status"] = "failed";
-	$action_result["error-type"] = "invalid-action-name";
+	$action_result["status"] = "Failed";
+	$action_result["errorType"] = "InvalidActionName";
 
 	exit();
 }
 
+$action_result["runId"] = uniqid();
+
 $db_connect = mysql_connect($db_host, $db_user, $db_password);
 if (!$db_connect) # ERROR
 {
-	$action_result["status"] = "failed";
-	$action_result["error-type"] = "server-error";
-	$action_result["error-message"] = "Could not connect: " . mysql_error();
+	$action_result["status"] = "Failed";
+	$action_result["errorType"] = "ServerError";
+	$action_result["errorMessage"] = "Could not connect: " . mysql_error();
 	
 	exit();
 }
