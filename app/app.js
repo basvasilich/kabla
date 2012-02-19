@@ -113,7 +113,7 @@ App = (function () {
             if (String(coupon).search(/^\s*\d+\s*$/) != -1) {
                 coupon = parseInt(coupon);
                 App.doAction({
-                    action: 'identify',
+                    action: 'auth',
                     data: {"access-code":coupon, "auth-type": "access-code"},
                     success: function (resultData) {
                         App.user.set(resultData);
