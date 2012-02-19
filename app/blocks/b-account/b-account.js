@@ -39,12 +39,15 @@ define(function () {
         },
 
         showMessage: function(){
-                this.control.find('account__backet__val').popover({
+            that = this
+            that.control.find('.btn').popover({
                     placement: 'bottom',
                     trigger: 'manual',
                     title: 'Позиция добавлена',
                     content: 'Все готово к оформлению заказа.'
                 })
+            that.control.find('.btn').popover('show')
+            setTimeout("that.control.find('.btn').popover('hide')", 2500)
         }
     })
 

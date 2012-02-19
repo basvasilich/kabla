@@ -1,7 +1,7 @@
 {#template MAIN}
 <div class="b-account">
     <span class="account__balance">
-        <span class="account__balance__title">Ваш баланс:</span>
+        <span class="account__balance__title">Доступная сумма:</span>
         <span class="account__balance__val"></span>
         <span class="account__balance__cur"></span>
     </span>

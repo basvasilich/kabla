@@ -57,6 +57,7 @@ define(function () {
             order.push({gift: params.gift, nominal: params.nominal})
             App.user.set({'order':  order})
             App.account.orderUpdate()
+            App.account.showMessage()
         }
     });
 
