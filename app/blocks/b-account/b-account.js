@@ -5,13 +5,14 @@ define(function () {
 
         initialize:function () {
             App.state.bind('change:orderVal', this.orderUpdate, this)
+            this.locDecl = App.state.get('locDecl')
         },
 
         render:function () {
             $('.tpl-account').setTemplateURL("app/blocks/b-account/b-account.tpl");
             var order = App.user.get('order') || []
-            var locDecl = App.state.get('locDecl')
-            var balanceCur = App.declOfNum(App.user.get('openToBuy'), locDecl[App.user.get('currency')] )
+
+            var balanceCur = App.declOfNum(App.user.get('openToBuy'), this.locDecl[App.user.get('currency')] )
             App.state.set({'orderVal': order.length})
             $('.tpl-account').setParam('orderVal', App.state.get('orderVal'));
             $('.tpl-account').setParam('balanceCur', balanceCur);
@@ -26,8 +27,7 @@ define(function () {
             App.state.set({'orderVal': order.length})
             if(App.state.get('orderVal') > 0){
                 this.control.addClass('b-account_isOrder')
-                console.log(this.control.basketVal)
-                this.control.basketVal.html(App.state.get('orderVal'))
+                this.control.basketVal.html(App.declOfNum(App.state.get('orderVal'), this.locDecl['order'] ))
             } else if(this.control) {
                 this.control.removeClass('b-account_isOrder')
             }

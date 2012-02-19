@@ -38,7 +38,7 @@ define(function () {
                     })
                 } else {
                     if (App.state.get('error-type') == 'bad-activation-code') {
-                        App.showError(this.el, 'bad-code');
+                        App.showError(this.el, 'bad-activation-code');
                         $(evt.target).button('reset')
                     } else if(App.state.get('error-type') == 'code-expired') {
                         App.showError(this.el, 'code-expired');

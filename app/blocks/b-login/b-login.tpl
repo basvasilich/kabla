@@ -29,7 +29,7 @@
             </form>
         </div>
         <div class="b-login__error span6 offset3">
-            <div class="alert bad-code">
+            <div class="alert bad-activation-code">
                 <a href="#" class="close">×</a>
 
                 <p><strong>У нас нет такого купона.</strong> Видимо вы ошиблись, проверьте правильно ли вы ввели его
