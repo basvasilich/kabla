@@ -73,8 +73,9 @@ App = (function () {
 
             var request = params.data || {}
             request.action = params.action
+            request.token = App.user.get('token')
             $.ajax({
-                url:'api/',
+                url: 'api/',
                 type:'POST',
                 data: request,
                 dataType:'json',
