@@ -1,6 +1,6 @@
 <?php
 
-class Account
+class Offer
 {
 	public $uid, $type, $currency, $balance, $openToBuy;
 	
@@ -11,4 +11,3 @@ class Account
 }
 
 ?>
-
