@@ -19,7 +19,7 @@ define(function(){
                     App.user.set(data[0]);
                 }
             })
-            App.account.render()
+//            App.account.render()
             $(this.el).addClass('b-app_wizardMode')
             App.router.navigate('start',true)
         },

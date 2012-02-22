@@ -51,13 +51,15 @@ define(function () {
                 params[this.name] = this.value;
             })
 
+
+
             if (params.digital) App.state.set({'digitalGift':true})
 
             var order = App.user.get('order') || []
             order.push({gift: params.gift, nominal: params.nominal})
             App.user.set({'order':  order})
-            App.account.orderUpdate()
-            App.account.showMessage()
+//            App.account.orderUpdate()
+//            App.account.showMessage()
         }
     });
 
