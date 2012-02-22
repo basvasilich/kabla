@@ -38,7 +38,7 @@
     <div class="partners-row popup-dock ">
 
         <div class="partner-pic">
-            <img src="{$T.img}" alt="{$T.name}"/>
+            <img src="{$T.resources[0].url}" alt="{$T.name}"/>
             {#if $T.digital}<div class="kind kind_digital"><span class="label success">Электронный сертификат</span></div>{#else}<div class="kind kind_analog"><span class="label notice">Подарочная карта</span></div>{#/if}
         </div>
         <div class="partner-text">
@@ -46,7 +46,9 @@
         </div>
         <div class="partner-form">
             <div class="card-form">
-                <a class="btn btn-large">Выбрать</a>
+                {#foreach $P.options as option}
+                        <a class="btn">{$T.option}</a>
+                {#/for}
             </div>
         </div>
         <form class="params">

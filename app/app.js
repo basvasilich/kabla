@@ -152,7 +152,8 @@ require([
 //    "blocks/b-account/b-account",
     "blocks/router",
     "../data/config",
-    "../data/loc"
+    "../data/loc",
+    "../data/catalog"
 ], function () {
         Backbone.history.start()
 

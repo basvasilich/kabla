@@ -25,7 +25,7 @@ define(function () {
             $(evt.target).button('loading');
             if (code) {
                 if (App.checkCode(code)) {
-                    if(!App.state.get('catalog')) App.doAction({
+                  /*  if(!App.state.get('catalog')) App.doAction({
                         action: 'get-products',
                         success: function(data){
                             App.state.set({'catalog': data})
@@ -35,7 +35,8 @@ define(function () {
                         error: function (result) {
                             App.showError(that.el, 'fail');
                         }
-                    })
+                    })*/
+                    App.control.render();
                 } else {
                     if (App.state.get('errorType') == 'bad-activation-code' | App.state.get('errorType') == 'code-expired') {
                         App.showError(this.el, App.state.get('errorType'));

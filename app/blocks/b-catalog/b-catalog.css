@@ -86,7 +86,7 @@
 
 .partner-text {
     float: left;
-    width: 49%;
+    width: 39%;
 }
 
 .partner-text p {
@@ -106,12 +106,12 @@
 
 .partner-form {
     float: right;
-    width: 25%;
+    width: 35%;
 }
 
 .partner-form .card-form {
     margin-top: 5px;
-    text-align: right;
+    text-align: left;
     padding-right: 20px;
 }
 
@@ -141,6 +141,12 @@
 .b-catalog .params
 {
     display: none;
+}
+
+.partner-form .card-form .btn
+{
+    margin-bottom: 7px;
+    margin-right: 5px;
 }
 
 

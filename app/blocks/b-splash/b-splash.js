@@ -26,15 +26,16 @@ define(function () {
         },
         loadCatalog: function(evt){
             var that = this
-            $(evt.target).button('loading');
-            if(!App.state.get('catalog')) App.doAction({
-                action: 'get-products',
-                success: function(data){
-                    App.state.set({'catalog': data})
-                    $(evt.target).button('reset')
-                    App.router.navigate('catalog', true);
-                }
-            })
+//            $(evt.target).button('loading');
+//            if(!App.state.get('catalog')) App.doAction({
+//                action: 'get-products',
+//                success: function(data){
+//                    App.state.set({'catalog': data})
+//                    $(evt.target).button('reset')
+//                    App.router.navigate('catalog', true);
+//                }
+//            })
+            App.router.navigate('catalog', true);
         }
 
     })
