@@ -3,6 +3,6 @@
     display: none;
     border-radius: 6px 6px 6px 6px;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
+    background: url("../img/logo_akvion.png") #fff no-repeat 98% 10px;
     margin-bottom: 40px;
 }
