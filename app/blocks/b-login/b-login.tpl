@@ -10,7 +10,7 @@
                     <div class="b-login__note__i">
                         <p class="b-login__title">Добро пожаловать в систему &laquo;Карт Бланш&raquo;!</p>
 
-                        <p class="logo"><img src="app/img/logo_akvion.jpg" alt="Аквион" width="200"/></p>
+                        <p class="logo"><img src="app/img/logo_akvion.png" alt="Аквион"/></p>
 
                         <p style="text-align:left">Введите номер сертификата</p>
 
