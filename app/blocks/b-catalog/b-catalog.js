@@ -8,17 +8,8 @@ define(function () {
 
         render:function () {
             App.state.unset('digitalGift')
-            var catalog = (function(){
-                var catalog = {}
-                var cat =  App.state.get('catalog');
-                console.log(cat)
-                catalog.products = cat[0].products
-                catalog.options = cat[0].features[0].amount.options
-                return catalog
-            })()
-
-            $(this.el).setParam('options', catalog.options);
-            $(this.el).processTemplate(catalog.products);
+            var catalog = App.state.get('catalog')
+            $(this.el).processTemplate(catalog);
             $(this.el).find('.partners-row').hover(function () {
                 $(this).addClass('hover');
             }, function () {
