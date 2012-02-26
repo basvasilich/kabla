@@ -37,16 +37,16 @@
     <div class="partners-row popup-dock ">
 
         <div class="partner-pic">
-            <img src="{$T.resources[0].url}" alt="{$T.name}"/>
+            <img src="{$T.products[0].resources[0].url}" alt="{$T.products[0].name}"/>
             {#if $T.digital}<div class="kind kind_digital"><span class="label success">Электронный сертификат</span></div>{#else}<div class="kind kind_analog"><span class="label notice">Подарочная карта</span></div>{#/if}
         </div>
         <div class="partner-text">
-            <p class="">{$T.description}</p>
+            <p class="">{$T.products[0].description}</p>
         </div>
         <div class="partner-form">
         	Доступные номиналы карт:
             <div class="card-form">
-                {#foreach $P.options as option}
+                {#foreach $T.features[0].amount.options as option}
                         <a class="btn">{$T.option}</a>
                 {#/for}
             </div>
