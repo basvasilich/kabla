@@ -86,7 +86,7 @@
 
 .partner-text {
     float: left;
-    width: 39%;
+    width: 70%;
 }
 
 .partner-text p {
@@ -105,8 +105,9 @@
 }
 
 .partner-form {
-    float: right;
-    width: 35%;
+	float: left;
+	padding: 16px 0;
+    width: 75%;
 }
 
 .partner-form .card-form {
@@ -145,7 +146,7 @@
 
 .partner-form .card-form .btn
 {
-	width: 40px;
+	width: 44px;
     margin-bottom: 7px;
     margin-right: 5px;
 }
