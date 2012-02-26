@@ -11,7 +11,7 @@ $data_set = array();
 
 $data_item = array(
     	"uid" => "12345",
-    	"name" => $row["NAME"],
+    	"type" => $row["NAME"],
     	"description" => $row["DESCRIPTION"]
     );
 
