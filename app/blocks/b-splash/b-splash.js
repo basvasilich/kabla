@@ -15,7 +15,8 @@ define(function () {
         },
 
         events:{
-            "click .btn-primary":"loadCatalog"
+            "click .btn-primary":"loadCatalog",
+            "click .start_splash .pic":"loadCatalog"
         },
 
         show:function () {
