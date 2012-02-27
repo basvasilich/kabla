@@ -1,5 +1,5 @@
 .b-catalog {
-    padding: 0 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
 }
 
 .b-catalog__i {
@@ -12,7 +12,7 @@
     padding-left: 140px;
     padding-top: 20px;
     min-height: 180px;
-
+	width: 640px;
 }
 
 .b-catalog__promo p
