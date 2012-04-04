@@ -58,8 +58,8 @@ define(function () {
             var order = App.user.get('order') || []
             order.push({gift: params.gift, nominal: params.nominal})
             App.user.set({'order':  order})
-//            App.account.orderUpdate()
-//            App.account.showMessage()
+            App.account.orderUpdate()
+            App.account.showMessage()
         }
     });
 

@@ -12,14 +12,14 @@ define(function(){
         render: function(){
             $(".tpl-topbar").processTemplate();
             App.wizardNav.render()
-            /*App.doAction({
+            App.doAction({
                 action:"getAccountInfo",
                 success: function(data)
                 {
                     App.user.set(data[0]);
                 }
-            })*/
-//            App.account.render()
+            })
+            App.account.render()
             $(this.el).addClass('b-app_wizardMode')
             App.router.navigate('start',true)
         },
@@ -32,8 +32,8 @@ define(function(){
             App.state.clear("auth");
             App.user.clear();
             App.eraseCookie('kabla');
-            App.login.render();
-            App.login.show();
+            window.location.hash = '';
+            window.location.reload();
         },
 
         messageClose: function(evt){

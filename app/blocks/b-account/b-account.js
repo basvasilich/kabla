@@ -2,11 +2,14 @@ define(function () {
     App.AccountView = Backbone.View.extend({
         model: App.user,
 
+        el:$('.b-account'),
 
         initialize:function () {
 //            App.state.bind('change:orderVal', this.orderUpdate, this)
 //            App.user.bind('change:openToBuy', this.balanceUpdate, this)
         },
+
+
 
         render:function () {
             $('.tpl-account').setTemplateURL("app/blocks/b-account/b-account.tpl");
@@ -15,6 +18,10 @@ define(function () {
             this.orderUpdate()
             this.balanceUpdate()
             return this;
+        },
+
+        events: {
+            "click .btn-success": "makeOrder"
         },
 
         orderUpdate: function(){
@@ -48,6 +55,10 @@ define(function () {
                 })
             that.control.find('.btn').popover('show')
             setTimeout("that.control.find('.btn').popover('hide')", 2500)
+        },
+
+        makeOrder: function(){
+            App.router.navigate('profile', true);
         }
     })
 
